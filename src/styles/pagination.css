@@ -1,0 +1,108 @@
+/**
+ * Gridix v1.0.0 — pagination and footer styles.
+ *
+ * The footer contains two regions:
+ *   .gridix-page-info  — "Showing 1–10 of 50 entries"
+ *   .gridix-pagination — navigation buttons (first, prev, numbered, next, last)
+ *
+ * Mobile-first: info and buttons stack vertically on narrow viewports.
+ * At 1280px they arrange horizontally with space-between alignment.
+ */
+
+.gridix-wrapper {
+  /* ── Footer container ───────────────────────────────────────────────── */
+
+  & .gridix-footer {
+    display: flex;
+    flex-direction: column; /* mobile: stacked */
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+
+    /* Desktop: side by side. */
+    @media (width >= 1280px) {
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+  }
+
+  /* ── Page info text ─────────────────────────────────────────────────── */
+
+  & .gridix-page-info {
+    font-size: var(--gridix-font-size);
+    color: var(--gridix-color-text-muted);
+  }
+
+  /* ── Pagination nav ─────────────────────────────────────────────────── */
+
+  & .gridix-pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center; /* center on mobile */
+
+    @media (width >= 1280px) {
+      justify-content: flex-start;
+    }
+  }
+
+  /* ── Individual page buttons ────────────────────────────────────────── */
+
+  & .gridix-page-btn {
+    /* Button reset */
+    appearance: none;
+    margin: 0;
+    cursor: pointer;
+    font: inherit;
+
+    /* Visual style */
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--gridix-color-border);
+    border-radius: var(--gridix-radius);
+    background: var(--gridix-color-bg);
+    color: var(--gridix-color-text);
+    font-size: var(--gridix-font-size);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        background 0.1s,
+        border-color 0.1s,
+        color 0.1s;
+    }
+
+    /**
+     * Touch targets on coarse-pointer devices — minimum 44×44 CSS pixels
+     * to satisfy WCAG 2.5.5 Target Size.
+     */
+    @media (pointer: coarse) {
+      min-width: 44px;
+      height: 44px;
+    }
+
+    &:not([disabled]):hover {
+      background: var(--gridix-color-hover-bg);
+      border-color: var(--gridix-color-accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--gridix-color-accent);
+      outline-offset: 2px;
+    }
+
+    &[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /** Active page button — uses accent color as background. */
+    &.gridix-page-btn--active {
+      background: var(--gridix-color-accent);
+      border-color: var(--gridix-color-accent);
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}

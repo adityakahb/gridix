@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix advanced demo — multi-row selection, sticky header, per-column search, CSV/JSON export, and column visibility on a 50-row dataset."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Gridix — Advanced</title>
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+      .demo-nav a:hover {
+        color: #fff;
+      }
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+      .demo-body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.5rem;
+      }
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 24px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      .feature-pills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .a11y-callout {
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin-bottom: 24px;
+        font-size: 0.8rem;
+        color: #15803d;
+        line-height: 1.7;
+      }
+      .a11y-callout strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.85rem;
+      }
+      kbd {
+        background: #e2e8f0;
+        color: #1e293b;
+        border-radius: 4px;
+        padding: 1px 6px;
+        font-family: monospace;
+        font-size: 0.78rem;
+        border: 1px solid #cbd5e1;
+      }
+      .pill {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+      .selection-info {
+        margin-top: 16px;
+        padding: 10px 14px;
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        color: #15803d;
+        min-height: 38px;
+      }
+      .event-log {
+        margin-top: 24px;
+      }
+      .event-log h3 {
+        font-size: 0.9rem;
+        margin: 0 0 8px;
+        color: #475569;
+      }
+      .log-entries {
+        background: #1e293b;
+        color: #e2e8f0;
+        font-family: monospace;
+        font-size: 0.78rem;
+        padding: 12px 16px;
+        border-radius: 8px;
+        height: 120px;
+        overflow-y: auto;
+        line-height: 1.8;
+      }
+      .log-entry {
+        color: #94a3b8;
+      }
+      .log-entry .log-event {
+        color: #60a5fa;
+      }
+      .log-entry .log-detail {
+        color: #86efac;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="demo-nav">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <div class="demo-body">
+      <h1>Advanced Demo</h1>
+      <p class="demo-desc">
+        Row selection (multi), sticky fixed header (scroll down inside the page), per-column search row, CSV + JSON
+        export, and column visibility toggle — all on a 50-row dataset. Hold <kbd>Shift</kbd> while clicking a column
+        header to add secondary sort columns.
+      </p>
+
+      <div class="feature-pills">
+        <span class="pill">Multi row select</span>
+        <span class="pill">Fixed sticky header</span>
+        <span class="pill">Per-col search</span>
+        <span class="pill">CSV export</span>
+        <span class="pill">JSON export</span>
+        <span class="pill">Col visibility</span>
+        <span class="pill">Multi-sort (Shift+click)</span>
+      </div>
+
+      <div class="a11y-callout">
+        <strong>Keyboard &amp; Accessibility</strong>
+        <strong>Grid navigation:</strong>
+        <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> move between cells &nbsp;|&nbsp; <kbd>Home</kbd> /
+        <kbd>End</kbd> first / last cell in row &nbsp;|&nbsp; <kbd>Ctrl</kbd>+<kbd>Home</kbd> / <kbd>End</kbd> first /
+        last cell in table &nbsp;|&nbsp; <kbd>PgUp</kbd> / <kbd>PgDn</kbd> jump 5 rows<br />
+        <strong>Toolbar:</strong>
+        <kbd>Tab</kbd> moves between toolbar controls and the table &nbsp;|&nbsp; <kbd>Shift</kbd>+click a header for
+        multi-sort &nbsp;|&nbsp; <kbd>Esc</kbd> closes open dropdowns and returns focus to their button<br />
+        <strong>Screen readers:</strong> sort state announced via <code>aria-sort</code>, filter results via live
+        region, row selection via <code>aria-selected</code> + live announcement.
+      </div>
+
+      <div id="selection-info" class="selection-info" role="status">
+        No rows selected. Click checkboxes to select rows.
+      </div>
+
+      <table
+        id="advanced-table"
+        data-gridix
+        data-gridix-search="true"
+        data-gridix-pagination="true"
+        data-gridix-page-length="10"
+        data-gridix-page-length-menu="10,25,50"
+        data-gridix-sort="true"
+        data-gridix-sort-multi="true"
+        data-gridix-col-visibility="true"
+        data-gridix-col-search="true"
+        data-gridix-export="csv,json,copy"
+        data-gridix-row-select="multi"
+        data-gridix-fixed-header="true"
+        data-gridix-fixed-header-offset="0"
+      >
+        <thead>
+          <tr>
+            <th data-gridix-col-type="number">ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th data-gridix-col-type="number">Salary</th>
+            <th data-gridix-col-type="date">Start Date</th>
+            <th>Location</th>
+            <th data-gridix-col-sortable="false" data-gridix-col-no-export>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Alice</td>
+            <td>Johnson</td>
+            <td>alice@acme.org</td>
+            <td>Engineering</td>
+            <td>Senior Dev</td>
+            <td>120000</td>
+            <td>2019-03-15</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Bob</td>
+            <td>Smith</td>
+            <td>bob@acme.org</td>
+            <td>Marketing</td>
+            <td>Manager</td>
+            <td>95000</td>
+            <td>2020-07-01</td>
+            <td>Chicago</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Charlie</td>
+            <td>Brown</td>
+            <td>charlie@acme.org</td>
+            <td>Design</td>
+            <td>Lead Designer</td>
+            <td>105000</td>
+            <td>2018-11-20</td>
+            <td>Austin</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Diana</td>
+            <td>Prince</td>
+            <td>diana@acme.org</td>
+            <td>Engineering</td>
+            <td>DevOps</td>
+            <td>115000</td>
+            <td>2021-01-10</td>
+            <td>Seattle</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Eve</td>
+            <td>Williams</td>
+            <td>eve@acme.org</td>
+            <td>HR</td>
+            <td>HR Lead</td>
+            <td>88000</td>
+            <td>2017-06-05</td>
+            <td>Boston</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Frank</td>
+            <td>Castle</td>
+            <td>frank@acme.org</td>
+            <td>Security</td>
+            <td>Analyst</td>
+            <td>98000</td>
+            <td>2022-02-14</td>
+            <td>Denver</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Grace</td>
+            <td>Hopper</td>
+            <td>grace@acme.org</td>
+            <td>Engineering</td>
+            <td>Architect</td>
+            <td>140000</td>
+            <td>2016-09-01</td>
+            <td>San Jose</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Hank</td>
+            <td>Pym</td>
+            <td>hank@acme.org</td>
+            <td>Research</td>
+            <td>Scientist</td>
+            <td>130000</td>
+            <td>2015-04-22</td>
+            <td>Cambridge</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Iris</td>
+            <td>West</td>
+            <td>iris@acme.org</td>
+            <td>Journalism</td>
+            <td>Reporter</td>
+            <td>72000</td>
+            <td>2023-08-30</td>
+            <td>Central City</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>James</td>
+            <td>Rhodes</td>
+            <td>james@acme.org</td>
+            <td>Engineering</td>
+            <td>Hardware Eng</td>
+            <td>125000</td>
+            <td>2020-12-01</td>
+            <td>Los Angeles</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Karen</td>
+            <td>Page</td>
+            <td>karen@acme.org</td>
+            <td>Legal</td>
+            <td>Attorney</td>
+            <td>145000</td>
+            <td>2019-05-18</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Leo</td>
+            <td>Fitz</td>
+            <td>leo@acme.org</td>
+            <td>Research</td>
+            <td>Engineer</td>
+            <td>110000</td>
+            <td>2018-03-07</td>
+            <td>London</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Maria</td>
+            <td>Hill</td>
+            <td>maria@acme.org</td>
+            <td>Operations</td>
+            <td>Director</td>
+            <td>160000</td>
+            <td>2014-10-15</td>
+            <td>Washington DC</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Nick</td>
+            <td>Fury</td>
+            <td>nick@acme.org</td>
+            <td>Operations</td>
+            <td>VP</td>
+            <td>200000</td>
+            <td>2010-01-01</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>Olivia</td>
+            <td>Pope</td>
+            <td>olivia@acme.org</td>
+            <td>PR</td>
+            <td>Strategist</td>
+            <td>135000</td>
+            <td>2017-07-19</td>
+            <td>Washington DC</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>Peter</td>
+            <td>Parker</td>
+            <td>peter@acme.org</td>
+            <td>Photography</td>
+            <td>Photographer</td>
+            <td>62000</td>
+            <td>2023-09-01</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td>Quinn</td>
+            <td>Fabray</td>
+            <td>quinn@acme.org</td>
+            <td>Marketing</td>
+            <td>Copywriter</td>
+            <td>78000</td>
+            <td>2021-11-15</td>
+            <td>Nashville</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td>Rachel</td>
+            <td>Green</td>
+            <td>rachel@acme.org</td>
+            <td>Retail</td>
+            <td>Buyer</td>
+            <td>85000</td>
+            <td>2020-03-22</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>19</td>
+            <td>Steve</td>
+            <td>Rogers</td>
+            <td>steve@acme.org</td>
+            <td>Leadership</td>
+            <td>Captain</td>
+            <td>180000</td>
+            <td>2012-07-04</td>
+            <td>Brooklyn</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td>Tony</td>
+            <td>Stark</td>
+            <td>tony@acme.org</td>
+            <td>Engineering</td>
+            <td>CTO</td>
+            <td>500000</td>
+            <td>2008-05-02</td>
+            <td>Malibu</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td>Uma</td>
+            <td>Thurman</td>
+            <td>uma@acme.org</td>
+            <td>Creative</td>
+            <td>Art Director</td>
+            <td>115000</td>
+            <td>2019-08-12</td>
+            <td>Los Angeles</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>22</td>
+            <td>Victor</td>
+            <td>Stone</td>
+            <td>victor@acme.org</td>
+            <td>Engineering</td>
+            <td>Robotics Eng</td>
+            <td>132000</td>
+            <td>2021-06-01</td>
+            <td>Detroit</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>23</td>
+            <td>Wanda</td>
+            <td>Maximoff</td>
+            <td>wanda@acme.org</td>
+            <td>Research</td>
+            <td>Scientist</td>
+            <td>128000</td>
+            <td>2020-10-31</td>
+            <td>Westview</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>24</td>
+            <td>Xavier</td>
+            <td>Charles</td>
+            <td>xavier@acme.org</td>
+            <td>Education</td>
+            <td>Director</td>
+            <td>155000</td>
+            <td>2005-09-01</td>
+            <td>Westchester</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>25</td>
+            <td>Yvonne</td>
+            <td>Strahovski</td>
+            <td>yvonne@acme.org</td>
+            <td>Operations</td>
+            <td>Manager</td>
+            <td>105000</td>
+            <td>2018-04-14</td>
+            <td>Sydney</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>26</td>
+            <td>Zoe</td>
+            <td>Washburne</td>
+            <td>zoe@acme.org</td>
+            <td>Logistics</td>
+            <td>Pilot</td>
+            <td>92000</td>
+            <td>2017-02-28</td>
+            <td>Serenity</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>27</td>
+            <td>Aaron</td>
+            <td>Davis</td>
+            <td>aaron@acme.org</td>
+            <td>Security</td>
+            <td>Guard</td>
+            <td>58000</td>
+            <td>2024-01-15</td>
+            <td>Brooklyn</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>28</td>
+            <td>Brenda</td>
+            <td>Song</td>
+            <td>brenda@acme.org</td>
+            <td>Marketing</td>
+            <td>Social Media</td>
+            <td>74000</td>
+            <td>2022-07-11</td>
+            <td>San Francisco</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>29</td>
+            <td>Carlos</td>
+            <td>Mendez</td>
+            <td>carlos@acme.org</td>
+            <td>Engineering</td>
+            <td>Backend Dev</td>
+            <td>118000</td>
+            <td>2021-03-08</td>
+            <td>Miami</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>30</td>
+            <td>Danielle</td>
+            <td>Brooks</td>
+            <td>danielle@acme.org</td>
+            <td>HR</td>
+            <td>Recruiter</td>
+            <td>82000</td>
+            <td>2020-09-14</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>31</td>
+            <td>Ethan</td>
+            <td>Hunt</td>
+            <td>ethan@acme.org</td>
+            <td>Operations</td>
+            <td>Agent</td>
+            <td>145000</td>
+            <td>2013-06-15</td>
+            <td>Vienna</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>32</td>
+            <td>Fiona</td>
+            <td>Gallagher</td>
+            <td>fiona@acme.org</td>
+            <td>Finance</td>
+            <td>Accountant</td>
+            <td>88000</td>
+            <td>2019-12-01</td>
+            <td>Chicago</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>33</td>
+            <td>George</td>
+            <td>Weasley</td>
+            <td>george@acme.org</td>
+            <td>Product</td>
+            <td>PM</td>
+            <td>122000</td>
+            <td>2020-04-01</td>
+            <td>London</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>34</td>
+            <td>Helena</td>
+            <td>Wayne</td>
+            <td>helena@acme.org</td>
+            <td>Legal</td>
+            <td>Paralegal</td>
+            <td>78000</td>
+            <td>2023-02-20</td>
+            <td>Gotham</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>35</td>
+            <td>Ivan</td>
+            <td>Drago</td>
+            <td>ivan@acme.org</td>
+            <td>Fitness</td>
+            <td>Trainer</td>
+            <td>68000</td>
+            <td>2022-11-25</td>
+            <td>Moscow</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>36</td>
+            <td>Jasmine</td>
+            <td>Agrabah</td>
+            <td>jasmine@acme.org</td>
+            <td>PR</td>
+            <td>Ambassador</td>
+            <td>112000</td>
+            <td>2018-08-15</td>
+            <td>Agrabah</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>37</td>
+            <td>Kyle</td>
+            <td>Reese</td>
+            <td>kyle@acme.org</td>
+            <td>Security</td>
+            <td>Specialist</td>
+            <td>95000</td>
+            <td>2029-01-01</td>
+            <td>Los Angeles</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>38</td>
+            <td>Leia</td>
+            <td>Organa</td>
+            <td>leia@acme.org</td>
+            <td>Leadership</td>
+            <td>Senator</td>
+            <td>175000</td>
+            <td>2015-12-18</td>
+            <td>Alderaan</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>39</td>
+            <td>Malcolm</td>
+            <td>Reynolds</td>
+            <td>malcolm@acme.org</td>
+            <td>Logistics</td>
+            <td>Captain</td>
+            <td>88000</td>
+            <td>2002-09-20</td>
+            <td>Serenity</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>40</td>
+            <td>Nora</td>
+            <td>Allen</td>
+            <td>nora@acme.org</td>
+            <td>Engineering</td>
+            <td>Speedster</td>
+            <td>135000</td>
+            <td>2049-11-15</td>
+            <td>Central City</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>41</td>
+            <td>Oscar</td>
+            <td>Isaac</td>
+            <td>oscar@acme.org</td>
+            <td>Creative</td>
+            <td>Director</td>
+            <td>148000</td>
+            <td>2018-05-04</td>
+            <td>Guatemala</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>42</td>
+            <td>Peggy</td>
+            <td>Carter</td>
+            <td>peggy@acme.org</td>
+            <td>Operations</td>
+            <td>Director</td>
+            <td>165000</td>
+            <td>2011-07-22</td>
+            <td>London</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>43</td>
+            <td>Quentin</td>
+            <td>Beck</td>
+            <td>quentin@acme.org</td>
+            <td>VFX</td>
+            <td>Artist</td>
+            <td>108000</td>
+            <td>2019-07-02</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>44</td>
+            <td>Rogue</td>
+            <td>LeBeau</td>
+            <td>rogue@acme.org</td>
+            <td>Research</td>
+            <td>Mutant Studies</td>
+            <td>122000</td>
+            <td>2018-06-13</td>
+            <td>Mississippi</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>45</td>
+            <td>Sam</td>
+            <td>Wilson</td>
+            <td>sam@acme.org</td>
+            <td>Operations</td>
+            <td>Agent</td>
+            <td>138000</td>
+            <td>2014-04-04</td>
+            <td>Harlem</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>46</td>
+            <td>Tessa</td>
+            <td>Thompson</td>
+            <td>tessa@acme.org</td>
+            <td>Engineering</td>
+            <td>Valkyrie Eng</td>
+            <td>142000</td>
+            <td>2017-11-03</td>
+            <td>Sakaar</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>47</td>
+            <td>Ulysses</td>
+            <td>Klaue</td>
+            <td>ulysses@acme.org</td>
+            <td>Procurement</td>
+            <td>Dealer</td>
+            <td>99000</td>
+            <td>2018-02-16</td>
+            <td>Johannesburg</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>48</td>
+            <td>Valeria</td>
+            <td>Richards</td>
+            <td>valeria@acme.org</td>
+            <td>Research</td>
+            <td>Prodigy</td>
+            <td>180000</td>
+            <td>2023-10-10</td>
+            <td>New York</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>49</td>
+            <td>Wade</td>
+            <td>Wilson</td>
+            <td>wade@acme.org</td>
+            <td>Security</td>
+            <td>Contractor</td>
+            <td>112000</td>
+            <td>2016-02-12</td>
+            <td>Vancouver</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>50</td>
+            <td>Xena</td>
+            <td>Amphipolis</td>
+            <td>xena@acme.org</td>
+            <td>Operations</td>
+            <td>Warrior</td>
+            <td>94000</td>
+            <td>2001-09-22</td>
+            <td>Greece</td>
+            <td><button>Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="event-log">
+        <h3>Live events</h3>
+        <div id="log" class="log-entries"><span class="log-entry">Waiting for events…</span></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Gridix } from '/src/index.ts';
+
+      const tableEl = document.getElementById('advanced-table');
+      const gridix = new Gridix(tableEl);
+
+      // Selection info
+      const selectionInfo = document.getElementById('selection-info');
+      tableEl.addEventListener('gridix:rowselect', e => {
+        const rows = e.detail.rows;
+        selectionInfo.textContent = rows.length
+          ? `${rows.length} row${rows.length > 1 ? 's' : ''} selected (indices: ${rows.join(', ')})`
+          : 'No rows selected. Click checkboxes to select rows.';
+        log('gridix:rowselect', JSON.stringify(e.detail));
+      });
+
+      // Event log
+      const logEl = document.getElementById('log');
+      function log(event, detail) {
+        const entry = document.createElement('div');
+        entry.className = 'log-entry';
+        const ts = new Date().toLocaleTimeString();
+        entry.innerHTML = `[${ts}] <span class="log-event">${event}</span> <span class="log-detail">${detail}</span>`;
+        logEl.innerHTML = '';
+        logEl.appendChild(entry);
+      }
+
+      tableEl.addEventListener('gridix:sort', e => log('gridix:sort', JSON.stringify(e.detail)));
+      tableEl.addEventListener('gridix:search', e => log('gridix:search', JSON.stringify(e.detail)));
+      tableEl.addEventListener('gridix:page', e => log('gridix:page', JSON.stringify(e.detail)));
+    </script>
+  </body>
+</html>

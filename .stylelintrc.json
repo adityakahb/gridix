@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "custom-property-pattern": "^gridix-",
+    "selector-class-pattern": "^gridix-",
+    "comment-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "no-descending-specificity": null,
+    "color-function-notation": "modern"
+  },
+  "ignoreFiles": ["dist/**", "coverage/**", "node_modules/**"]
+}

@@ -1,0 +1,252 @@
+/**
+ * Gridix v1.0.0 — toolbar styles.
+ *
+ * The toolbar contains the page-length selector, global search input,
+ * column-visibility dropdown, and export menu.
+ *
+ * Mobile-first layout: controls stack vertically on narrow viewports.
+ * At 1280px they arrange horizontally with space-between alignment.
+ *
+ * Touch targets on coarse-pointer devices (phones, tablets) meet the
+ * WCAG 2.5.5 minimum of 44×44 CSS pixels via @media (pointer: coarse).
+ */
+
+.gridix-wrapper {
+  /* ── Toolbar container ──────────────────────────────────────────────── */
+
+  & .gridix-toolbar {
+    display: flex;
+    flex-direction: column; /* mobile: stacked vertically */
+    gap: var(--gridix-toolbar-gap);
+    margin-bottom: 12px;
+
+    /* Desktop: side-by-side with space between left and right groups. */
+    @media (width >= 1280px) {
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  /* ── Toolbar left / right groupings ────────────────────────────────── */
+
+  & .gridix-toolbar-left,
+  & .gridix-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--gridix-toolbar-gap);
+    flex-wrap: wrap;
+  }
+
+  & .gridix-toolbar-right {
+    /* Desktop: push to the end of the row. */
+    @media (width >= 1280px) {
+      margin-inline-start: auto;
+    }
+  }
+
+  /* ── Page-length label and select ──────────────────────────────────── */
+
+  & .gridix-page-length-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--gridix-font-size);
+    white-space: nowrap;
+  }
+
+  & .gridix-page-length-select {
+    padding: 5px 8px;
+    border: 1px solid var(--gridix-color-border);
+    border-radius: var(--gridix-radius);
+    background: var(--gridix-color-bg);
+    color: var(--gridix-color-text);
+    font-size: var(--gridix-font-size);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--gridix-color-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  /* ── Global search input ────────────────────────────────────────────── */
+
+  & .gridix-search-input {
+    width: 100%; /* mobile: full width */
+    padding: 6px 10px;
+    border: 1px solid var(--gridix-color-border);
+    border-radius: var(--gridix-radius);
+    font-size: var(--gridix-font-size);
+    background: var(--gridix-color-bg);
+    color: var(--gridix-color-text);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+    }
+
+    &::placeholder {
+      color: var(--gridix-color-text-muted);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--gridix-color-accent);
+      box-shadow: 0 0 0 3px rgb(59 130 246 / 15%);
+    }
+
+    /* Desktop: fixed minimum width. */
+    @media (width >= 1280px) {
+      width: auto;
+      min-width: 180px;
+    }
+  }
+
+  /* ── Column-visibility and export wrappers ──────────────────────────── */
+
+  & .gridix-col-vis-wrap,
+  & .gridix-export-wrap {
+    position: relative;
+  }
+
+  /* ── Column-visibility and export trigger buttons ───────────────────── */
+
+  & .gridix-col-vis-btn,
+  & .gridix-export-btn {
+    /* Button reset */
+    appearance: none;
+    margin: 0;
+    cursor: pointer;
+    font: inherit;
+
+    /* Visual style */
+    padding: 6px 12px;
+    border: 1px solid var(--gridix-color-border);
+    border-radius: var(--gridix-radius);
+    background: var(--gridix-color-bg);
+    color: var(--gridix-color-text);
+    font-size: var(--gridix-font-size);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        background 0.1s,
+        border-color 0.1s;
+    }
+
+    /**
+     * Touch targets: minimum 44×44 CSS pixels on coarse-pointer devices
+     * (phones, tablets) to satisfy WCAG 2.5.5 Target Size.
+     */
+    @media (pointer: coarse) {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 10px 14px;
+    }
+
+    &:hover {
+      background: var(--gridix-color-hover-bg);
+      border-color: var(--gridix-color-accent);
+    }
+
+    &[aria-expanded="true"] {
+      background: var(--gridix-color-hover-bg);
+      border-color: var(--gridix-color-accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--gridix-color-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  /* ── Column-visibility and export dropdowns ─────────────────────────── */
+
+  & .gridix-col-vis-dropdown,
+  & .gridix-export-menu {
+    position: absolute;
+
+    /**
+     * inset-inline-end: 0 aligns the dropdown to the end of the trigger in
+     * both LTR (right-aligned) and RTL (left-aligned) layouts.
+     */
+    inset-inline-end: 0;
+    top: calc(100% + 4px);
+    min-width: 160px;
+    background: var(--gridix-color-bg);
+    border: 1px solid var(--gridix-color-border);
+    border-radius: var(--gridix-radius);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+    z-index: 100;
+    padding: 4px 0;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  /* ── Column-visibility items (checkboxes) ───────────────────────────── */
+
+  & .gridix-col-vis-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-size: var(--gridix-font-size);
+    color: var(--gridix-color-text);
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--gridix-color-hover-bg);
+    }
+  }
+
+  /* ── Export menu items ──────────────────────────────────────────────── */
+
+  & .gridix-export-item {
+    /* Button reset */
+    appearance: none;
+    background: none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    font: inherit;
+
+    display: block;
+    width: 100%;
+    text-align: start;
+    padding: 7px 14px;
+    font-size: var(--gridix-font-size);
+    color: var(--gridix-color-text);
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--gridix-color-hover-bg);
+    }
+  }
+
+  /* ── Per-column search inputs ───────────────────────────────────────── */
+
+  & .gridix-col-search-input {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid var(--gridix-color-border);
+    border-radius: var(--gridix-radius);
+    font-size: calc(var(--gridix-font-size) - 1px);
+    background: var(--gridix-color-bg);
+    color: var(--gridix-color-text);
+
+    &:focus {
+      outline: none;
+      border-color: var(--gridix-color-accent);
+      box-shadow: 0 0 0 2px rgb(59 130 246 / 15%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--gridix-color-accent);
+      outline-offset: 2px;
+    }
+  }
+}

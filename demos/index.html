@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix — AEM-compatible, TypeScript-first DataTables alternative. Zero JS required from authors. Demos for basic, responsive, advanced, themed, print, and Lighthouse-optimised tables."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1e293b" />
+    <title>Gridix Demos</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+        line-height: 1.5;
+      }
+
+      .hero {
+        background: #1e293b;
+        color: #fff;
+        padding: 48px 32px;
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: 2rem;
+      }
+
+      .hero p {
+        margin: 0;
+        opacity: 0.7;
+        font-size: 1.05rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 40px 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 24px;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          box-shadow 0.15s,
+          transform 0.15s;
+        display: block;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card {
+          transition: none;
+        }
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+        transform: translateY(-2px);
+      }
+
+      .card-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+      }
+
+      .card p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: #64748b;
+        line-height: 1.5;
+      }
+
+      .badge {
+        display: inline-block;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 20px;
+        margin-top: 12px;
+        font-weight: 600;
+      }
+
+      .badge-blue {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .badge-green {
+        background: #dcfce7;
+        color: #15803d;
+      }
+      .badge-purple {
+        background: #f3e8ff;
+        color: #7e22ce;
+      }
+      .badge-orange {
+        background: #ffedd5;
+        color: #c2410c;
+      }
+      .badge-gray {
+        background: #f1f5f9;
+        color: #475569;
+      }
+      .badge-red {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+      .badge-cyan {
+        background: #cffafe;
+        color: #0e7490;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0f172a;
+          color: #f1f5f9;
+        }
+        .card {
+          background: #1e293b;
+          border-color: #334155;
+        }
+        .card p {
+          color: #94a3b8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>Gridix</h1>
+      <p>A DataTables alternative — AEM-compatible, TypeScript-first, smart responsive widths.</p>
+    </header>
+
+    <nav class="grid" aria-label="Demo pages">
+      <a class="card" href="basic.html">
+        <div class="card-icon" aria-hidden="true">📋</div>
+        <h2>Basic</h2>
+        <p>
+          8-column employee table with search, sort, pagination, column visibility and export all enabled via data
+          attributes.
+        </p>
+        <span class="badge badge-blue">Getting started</span>
+      </a>
+
+      <a class="card" href="responsive.html">
+        <div class="card-icon" aria-hidden="true">📱</div>
+        <h2>Responsive Widths</h2>
+        <p>
+          Three tables — dense columns, wide text, and mixed — each gets its own natural min-width. Resize the window to
+          see the difference.
+        </p>
+        <span class="badge badge-green">Core feature</span>
+      </a>
+
+      <a class="card" href="aem.html">
+        <div class="card-icon" aria-hidden="true">🧩</div>
+        <h2>AEM Data Attributes</h2>
+        <p>
+          Zero JavaScript — all features configured purely through data-gridix-* attributes, exactly as an AEM author
+          would set them via a dialog.
+        </p>
+        <span class="badge badge-orange">AEM</span>
+      </a>
+
+      <a class="card" href="advanced.html">
+        <div class="card-icon" aria-hidden="true">⚙️</div>
+        <h2>Advanced</h2>
+        <p>Row selection, fixed sticky header, per-column search filters, CSV/JSON export on a 50-row dataset.</p>
+        <span class="badge badge-purple">Full features</span>
+      </a>
+
+      <a class="card" href="themes.html">
+        <div class="card-icon" aria-hidden="true">🎨</div>
+        <h2>Themes</h2>
+        <p>
+          Default, Minimal and Dark themes displayed side by side on identical data. Override with CSS custom
+          properties.
+        </p>
+        <span class="badge badge-gray">Theming</span>
+      </a>
+
+      <a class="card" href="print.html">
+        <div class="card-icon" aria-hidden="true">🖨️</div>
+        <h2>Print</h2>
+        <p>
+          Hard-copy optimised output. Toolbar and pagination are hidden; all rows shown; borders forced on. Click "Print
+          this page" to test.
+        </p>
+        <span class="badge badge-red">Print</span>
+      </a>
+
+      <a class="card" href="lighthouse.html">
+        <div class="card-icon" aria-hidden="true">🏎️</div>
+        <h2>Lighthouse</h2>
+        <p>
+          Performance, accessibility, best-practices and SEO optimised demo. Preloaded CSS, deferred JS, semantic ARIA
+          markup, and WCAG AA contrast.
+        </p>
+        <span class="badge badge-cyan">Performance</span>
+      </a>
+    </nav>
+  </body>
+</html>

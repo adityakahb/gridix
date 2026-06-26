@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix basic demo — 8-column employee table with search, sort, pagination, column visibility, and CSV/JSON export configured entirely via data-gridix-* attributes."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Gridix — Basic Demo</title>
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+      .demo-nav a:hover {
+        color: #fff;
+      }
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+      .demo-body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.5rem;
+      }
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 28px;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="demo-nav">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <div class="demo-body">
+      <h1>Basic Demo</h1>
+      <p class="demo-desc">
+        All features enabled via <code>data-gridix-*</code> attributes. No JavaScript written by the page author.
+      </p>
+
+      <table
+        data-gridix
+        data-gridix-search="true"
+        data-gridix-pagination="true"
+        data-gridix-page-length="5"
+        data-gridix-page-length-menu="5,10,25"
+        data-gridix-sort="true"
+        data-gridix-col-visibility="true"
+        data-gridix-export="csv,json,copy"
+      >
+        <thead>
+          <tr>
+            <th data-gridix-col-type="number" data-gridix-col-width="60">ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th data-gridix-col-type="number">Salary</th>
+            <th data-gridix-col-type="date">Start Date</th>
+            <th data-gridix-col-sortable="false" data-gridix-col-no-export>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Alice</td>
+            <td>Johnson</td>
+            <td>Engineering</td>
+            <td>Senior Dev</td>
+            <td>$120,000</td>
+            <td>2019-03-15</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Bob</td>
+            <td>Smith</td>
+            <td>Marketing</td>
+            <td>Manager</td>
+            <td>$95,000</td>
+            <td>2020-07-01</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Charlie</td>
+            <td>Brown</td>
+            <td>Design</td>
+            <td>Lead Designer</td>
+            <td>$105,000</td>
+            <td>2018-11-20</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Diana</td>
+            <td>Prince</td>
+            <td>Engineering</td>
+            <td>DevOps</td>
+            <td>$115,000</td>
+            <td>2021-01-10</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Eve</td>
+            <td>Williams</td>
+            <td>HR</td>
+            <td>HR Lead</td>
+            <td>$88,000</td>
+            <td>2017-06-05</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Frank</td>
+            <td>Castle</td>
+            <td>Security</td>
+            <td>Analyst</td>
+            <td>$98,000</td>
+            <td>2022-02-14</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Grace</td>
+            <td>Hopper</td>
+            <td>Engineering</td>
+            <td>Architect</td>
+            <td>$140,000</td>
+            <td>2016-09-01</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Hank</td>
+            <td>Pym</td>
+            <td>Research</td>
+            <td>Scientist</td>
+            <td>$130,000</td>
+            <td>2015-04-22</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Iris</td>
+            <td>West</td>
+            <td>Journalism</td>
+            <td>Reporter</td>
+            <td>$72,000</td>
+            <td>2023-08-30</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>James</td>
+            <td>Rhodes</td>
+            <td>Engineering</td>
+            <td>Hardware Eng</td>
+            <td>$125,000</td>
+            <td>2020-12-01</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Karen</td>
+            <td>Page</td>
+            <td>Legal</td>
+            <td>Attorney</td>
+            <td>$145,000</td>
+            <td>2019-05-18</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Leo</td>
+            <td>Fitz</td>
+            <td>Research</td>
+            <td>Engineer</td>
+            <td>$110,000</td>
+            <td>2018-03-07</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Maria</td>
+            <td>Hill</td>
+            <td>Operations</td>
+            <td>Director</td>
+            <td>$160,000</td>
+            <td>2014-10-15</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Nick</td>
+            <td>Fury</td>
+            <td>Operations</td>
+            <td>VP</td>
+            <td>$200,000</td>
+            <td>2010-01-01</td>
+            <td><button>Edit</button></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td>Olivia</td>
+            <td>Pope</td>
+            <td>PR</td>
+            <td>Strategist</td>
+            <td>$135,000</td>
+            <td>2017-07-19</td>
+            <td><button>Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script type="module">
+      import { Gridix } from '/src/index.ts';
+      document.querySelectorAll('table[data-gridix]').forEach(t => new Gridix(t));
+    </script>
+  </body>
+</html>

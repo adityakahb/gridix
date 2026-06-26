@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix responsive widths demo — tables that measure their own natural content-fit min-width independently using ResizeObserver, so scrollbars appear only when needed."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Gridix — Responsive Widths</title>
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+      .demo-nav a:hover {
+        color: #fff;
+      }
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+      .demo-body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.5rem;
+      }
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 32px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      .section {
+        margin-bottom: 48px;
+      }
+      .section h2 {
+        font-size: 1.1rem;
+        margin: 0 0 4px;
+      }
+      .section p {
+        color: #64748b;
+        font-size: 0.85rem;
+        margin: 0 0 16px;
+      }
+      .callout {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin-bottom: 32px;
+        font-size: 0.875rem;
+        color: #1d4ed8;
+        line-height: 1.6;
+      }
+      .callout strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="demo-nav">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <div class="demo-body">
+      <h1>Responsive Widths</h1>
+      <p class="demo-desc">
+        Each table below measures its own natural content-fit width using the browser's layout engine, then sets that as
+        its <code>min-width</code>. The scroll container only shows a scrollbar when the viewport is narrower than
+        <em>that specific table's</em> natural width — not a shared fixed percentage applied to all tables alike.
+        <br /><br />
+        Resize the window (or use browser DevTools device emulation) to see each table respond independently.
+      </p>
+
+      <div class="callout">
+        <strong>How it works</strong>
+        The plugin temporarily sets each table to <code>width:auto; table-layout:auto</code>, reads
+        <code>scrollWidth</code> (the browser's computed minimum), then restores styles and sets that value as the
+        table's <code>min-width</code>. A <code>ResizeObserver</code> re-runs this on container resize.
+      </div>
+
+      <!-- Table A: 12 narrow cols — needs lots of horizontal space -->
+      <div class="section">
+        <h2>Table A — 12 narrow columns (dense data)</h2>
+        <p>
+          Many short-value columns. This table naturally needs a wide minimum width and scrolls early on small
+          viewports.
+        </p>
+        <table data-gridix data-gridix-search="false" data-gridix-pagination="false" data-gridix-sort="true">
+          <thead>
+            <tr>
+              <th data-gridix-col-type="number">ID</th>
+              <th>Code</th>
+              <th>Jan</th>
+              <th>Feb</th>
+              <th>Mar</th>
+              <th>Apr</th>
+              <th>May</th>
+              <th>Jun</th>
+              <th>Jul</th>
+              <th>Aug</th>
+              <th>Sep</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>PRD-01</td>
+              <td>42</td>
+              <td>38</td>
+              <td>55</td>
+              <td>61</td>
+              <td>48</td>
+              <td>70</td>
+              <td>65</td>
+              <td>72</td>
+              <td>58</td>
+              <td>509</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>PRD-02</td>
+              <td>91</td>
+              <td>84</td>
+              <td>77</td>
+              <td>88</td>
+              <td>93</td>
+              <td>79</td>
+              <td>102</td>
+              <td>95</td>
+              <td>87</td>
+              <td>796</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>PRD-03</td>
+              <td>14</td>
+              <td>21</td>
+              <td>18</td>
+              <td>25</td>
+              <td>19</td>
+              <td>22</td>
+              <td>17</td>
+              <td>28</td>
+              <td>23</td>
+              <td>187</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>PRD-04</td>
+              <td>63</td>
+              <td>57</td>
+              <td>69</td>
+              <td>74</td>
+              <td>68</td>
+              <td>81</td>
+              <td>76</td>
+              <td>83</td>
+              <td>71</td>
+              <td>642</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>PRD-05</td>
+              <td>29</td>
+              <td>33</td>
+              <td>27</td>
+              <td>31</td>
+              <td>35</td>
+              <td>30</td>
+              <td>36</td>
+              <td>34</td>
+              <td>32</td>
+              <td>287</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table B: 4 wide-text cols — needs moderate width but cells are verbose -->
+      <div class="section">
+        <h2>Table B — 4 wide-text columns (verbose content)</h2>
+        <p>
+          Few columns but with long text values. The natural width is driven by cell content, not column count. Text
+          wraps naturally instead of being forced wide.
+        </p>
+        <table data-gridix data-gridix-search="false" data-gridix-pagination="false" data-gridix-sort="true">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Enterprise Analytics Platform</td>
+              <td>A scalable, cloud-native solution for real-time data processing</td>
+              <td>Business Intelligence</td>
+              <td>Requires SSO integration with existing IdP</td>
+            </tr>
+            <tr>
+              <td>Mobile Workforce Suite</td>
+              <td>Cross-platform app management with offline support and sync</td>
+              <td>Productivity</td>
+              <td>iOS 16+ and Android 12+ required</td>
+            </tr>
+            <tr>
+              <td>Network Security Monitor</td>
+              <td>Intrusion detection and automated threat response for hybrid networks</td>
+              <td>Cybersecurity</td>
+              <td>Compatible with existing SIEM tooling</td>
+            </tr>
+            <tr>
+              <td>Customer Data Platform</td>
+              <td>Unified customer profiles across web, mobile and in-store touchpoints</td>
+              <td>Marketing Tech</td>
+              <td>GDPR-compliant, EU data residency available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table C: mixed — some narrow, some wide -->
+      <div class="section">
+        <h2>Table C — Mixed columns (varied content density)</h2>
+        <p>
+          A realistic mix of short values (IDs, status badges) and longer text (names, descriptions). Each column
+          contributes its natural weight to the total min-width.
+        </p>
+        <table
+          data-gridix
+          data-gridix-search="true"
+          data-gridix-pagination="true"
+          data-gridix-page-length="4"
+          data-gridix-sort="true"
+        >
+          <thead>
+            <tr>
+              <th data-gridix-col-type="number">ID</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Status</th>
+              <th data-gridix-col-type="date">Last Login</th>
+              <th data-gridix-col-type="number">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1001</td>
+              <td>Alexandra Thompson</td>
+              <td>a.thompson@acme.org</td>
+              <td>Engineering</td>
+              <td>Active</td>
+              <td>2026-06-05</td>
+              <td>98</td>
+            </tr>
+            <tr>
+              <td>1002</td>
+              <td>Benjamin Fitzgerald</td>
+              <td>b.fitzgerald@acme.org</td>
+              <td>Marketing</td>
+              <td>Active</td>
+              <td>2026-06-04</td>
+              <td>74</td>
+            </tr>
+            <tr>
+              <td>1003</td>
+              <td>Catherine Whitmore</td>
+              <td>c.whitmore@acme.org</td>
+              <td>Design</td>
+              <td>Inactive</td>
+              <td>2026-05-12</td>
+              <td>61</td>
+            </tr>
+            <tr>
+              <td>1004</td>
+              <td>David Okafor</td>
+              <td>d.okafor@acme.org</td>
+              <td>Engineering</td>
+              <td>Active</td>
+              <td>2026-06-06</td>
+              <td>87</td>
+            </tr>
+            <tr>
+              <td>1005</td>
+              <td>Eleanor Nakamura</td>
+              <td>e.nakamura@acme.org</td>
+              <td>Operations</td>
+              <td>Active</td>
+              <td>2026-06-01</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td>1006</td>
+              <td>Felix Andersson</td>
+              <td>f.andersson@acme.org</td>
+              <td>HR</td>
+              <td>Pending</td>
+              <td>2026-05-28</td>
+              <td>55</td>
+            </tr>
+            <tr>
+              <td>1007</td>
+              <td>Gabrielle Moreau</td>
+              <td>g.moreau@acme.org</td>
+              <td>Legal</td>
+              <td>Active</td>
+              <td>2026-06-03</td>
+              <td>83</td>
+            </tr>
+            <tr>
+              <td>1008</td>
+              <td>Hiroshi Tanaka</td>
+              <td>h.tanaka@acme.org</td>
+              <td>Engineering</td>
+              <td>Active</td>
+              <td>2026-06-06</td>
+              <td>96</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Gridix } from '/src/index.ts';
+      document.querySelectorAll('table[data-gridix]').forEach(t => new Gridix(t));
+    </script>
+  </body>
+</html>

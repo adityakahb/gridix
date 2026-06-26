@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gridix print demo — shows how Gridix tables render as hard-copy print output." />
+    <meta name="color-scheme" content="light dark" />
+    <title>Gridix — Print Demo</title>
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+      .demo-nav a:hover {
+        color: #fff;
+      }
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+      .demo-body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.5rem;
+      }
+      h2 {
+        margin: 24px 0 8px;
+        font-size: 1.1rem;
+      }
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 28px;
+        font-size: 0.9rem;
+      }
+      .print-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: #1e293b;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin-bottom: 24px;
+      }
+      .print-btn:hover {
+        background: #334155;
+      }
+      /* Hide print button itself when printing */
+      @media print {
+        .demo-nav,
+        .print-btn,
+        .demo-desc,
+        h2.screen-only {
+          display: none !important;
+        }
+        body {
+          background: #fff;
+        }
+        .demo-body {
+          padding: 0;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="demo-nav">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <div class="demo-body">
+      <h1>Print Demo</h1>
+      <p class="demo-desc">
+        Click <strong>Print this page</strong> to see how Gridix renders as hard copy. The toolbar, pagination controls,
+        and export menu are hidden; all rows are shown; and borders are forced on for readability.
+      </p>
+
+      <button class="print-btn" onclick="window.print()">&#x1F5A8; Print this page</button>
+
+      <h2 class="screen-only">Employee Data</h2>
+
+      <table
+        data-gridix
+        data-gridix-search="true"
+        data-gridix-pagination="true"
+        data-gridix-page-length="5"
+        data-gridix-page-length-menu="5,10,25"
+        data-gridix-sort="true"
+        data-gridix-export="csv,json"
+        data-gridix-col-visibility="true"
+        aria-label="Employee data table"
+      >
+        <caption>
+          Gridix Print Demo — Employee Data (print view shows all rows)
+        </caption>
+        <thead>
+          <tr>
+            <th data-gridix-col-type="number" data-gridix-col-width="60">ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th data-gridix-col-type="number">Salary</th>
+            <th data-gridix-col-type="date">Start Date</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Alice</td>
+            <td>Smith</td>
+            <td>Engineering</td>
+            <td>Senior Engineer</td>
+            <td>120,000</td>
+            <td>2019-03-15</td>
+            <td>New York</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Bob</td>
+            <td>Jones</td>
+            <td>Design</td>
+            <td>UX Designer</td>
+            <td>95,000</td>
+            <td>2020-07-01</td>
+            <td>San Francisco</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Carol</td>
+            <td>White</td>
+            <td>Marketing</td>
+            <td>Marketing Manager</td>
+            <td>105,000</td>
+            <td>2018-11-20</td>
+            <td>Chicago</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Dave</td>
+            <td>Brown</td>
+            <td>Engineering</td>
+            <td>Junior Engineer</td>
+            <td>80,000</td>
+            <td>2022-01-10</td>
+            <td>Austin</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Eve</td>
+            <td>Davis</td>
+            <td>Sales</td>
+            <td>Account Executive</td>
+            <td>88,000</td>
+            <td>2021-06-14</td>
+            <td>Boston</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Frank</td>
+            <td>Miller</td>
+            <td>Engineering</td>
+            <td>Staff Engineer</td>
+            <td>145,000</td>
+            <td>2016-04-25</td>
+            <td>Seattle</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Grace</td>
+            <td>Wilson</td>
+            <td>HR</td>
+            <td>HR Director</td>
+            <td>115,000</td>
+            <td>2017-09-08</td>
+            <td>New York</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Hank</td>
+            <td>Moore</td>
+            <td>Finance</td>
+            <td>Controller</td>
+            <td>130,000</td>
+            <td>2015-02-17</td>
+            <td>Chicago</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Iris</td>
+            <td>Taylor</td>
+            <td>Design</td>
+            <td>Product Designer</td>
+            <td>102,000</td>
+            <td>2021-11-03</td>
+            <td>San Francisco</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Jack</td>
+            <td>Anderson</td>
+            <td>Sales</td>
+            <td>Sales Director</td>
+            <td>140,000</td>
+            <td>2014-07-22</td>
+            <td>New York</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Karen</td>
+            <td>Thomas</td>
+            <td>Engineering</td>
+            <td>Engineering Manager</td>
+            <td>160,000</td>
+            <td>2013-05-30</td>
+            <td>Seattle</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Leo</td>
+            <td>Jackson</td>
+            <td>Marketing</td>
+            <td>Content Strategist</td>
+            <td>78,000</td>
+            <td>2023-02-28</td>
+            <td>Austin</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script type="module">
+      import '/src/cdn.ts';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix AEM data attributes demo — every feature configured through data-gridix-* HTML attributes with zero JavaScript required from the page author."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Gridix — AEM Data Attributes</title>
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+      .demo-nav a:hover {
+        color: #fff;
+      }
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+      .demo-body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.5rem;
+      }
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 32px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      .section {
+        margin-bottom: 52px;
+      }
+      .section h2 {
+        font-size: 1.1rem;
+        margin: 0 0 4px;
+      }
+      .section p {
+        color: #64748b;
+        font-size: 0.85rem;
+        margin: 0 0 16px;
+      }
+      .attrs-block {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 16px 20px;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-family: monospace;
+        overflow-x: auto;
+      }
+      .attr-name {
+        color: #93c5fd;
+      }
+      .attr-value {
+        color: #86efac;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="demo-nav">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <div class="demo-body">
+      <h1>AEM Data Attributes</h1>
+      <p class="demo-desc">
+        Both tables below are fully configured through <code>data-gridix-*</code> attributes on the
+        <code>&lt;table&gt;</code> element and <code>data-gridix-col-*</code> attributes on individual
+        <code>&lt;th&gt;</code> elements. An AEM dialog author sets these values — no JavaScript required on the page.
+        The CDN build (<code>gridix.cdn.min.js</code>) auto-initialises every <code>[data-gridix]</code> table on
+        <code>DOMContentLoaded</code>.
+      </p>
+
+      <!-- Table 1: minimal search + sort only -->
+      <div class="section">
+        <h2>Table 1 — Search &amp; sort only, no pagination</h2>
+        <p>Configured for a short reference table where pagination would be unnecessary.</p>
+        <div class="attrs-block">
+          &lt;table<br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-search</span>=<span class="attr-value">"true"</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-pagination</span>=<span class="attr-value">"false"</span
+          ><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-sort</span>=<span class="attr-value">"true"</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-export</span>=<span class="attr-value">"csv,copy"</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-empty-text</span>=<span class="attr-value"
+            >"No countries match your search."</span
+          ><br />
+          &gt;
+        </div>
+
+        <table
+          data-gridix
+          data-gridix-search="true"
+          data-gridix-search-placeholder="Search countries…"
+          data-gridix-pagination="false"
+          data-gridix-sort="true"
+          data-gridix-export="csv,copy"
+          data-gridix-empty-text="No countries match your search."
+        >
+          <thead>
+            <tr>
+              <th data-gridix-col-type="number">Rank</th>
+              <th>Country</th>
+              <th>Region</th>
+              <th data-gridix-col-type="number">Population (M)</th>
+              <th data-gridix-col-type="number">GDP (USD B)</th>
+              <th data-gridix-col-type="number">HDI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>United States</td>
+              <td>Americas</td>
+              <td>331</td>
+              <td>23315</td>
+              <td>0.926</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>China</td>
+              <td>Asia</td>
+              <td>1412</td>
+              <td>17734</td>
+              <td>0.768</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Japan</td>
+              <td>Asia</td>
+              <td>125</td>
+              <td>4937</td>
+              <td>0.925</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Germany</td>
+              <td>Europe</td>
+              <td>83</td>
+              <td>4223</td>
+              <td>0.942</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>India</td>
+              <td>Asia</td>
+              <td>1380</td>
+              <td>3176</td>
+              <td>0.633</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>United Kingdom</td>
+              <td>Europe</td>
+              <td>67</td>
+              <td>3131</td>
+              <td>0.932</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>France</td>
+              <td>Europe</td>
+              <td>67</td>
+              <td>2937</td>
+              <td>0.903</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Brazil</td>
+              <td>Americas</td>
+              <td>214</td>
+              <td>1608</td>
+              <td>0.754</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table 2: full features, dark theme, col-search, hidden col -->
+      <div class="section">
+        <h2>Table 2 — Full feature set, dark theme, hidden column, col-search</h2>
+        <p>
+          Demonstrates a column initially hidden (<code>data-gridix-col-visible="false"</code>), per-column filter
+          inputs, multi-sort enabled, and the dark theme — all via attributes.
+        </p>
+        <div class="attrs-block">
+          &lt;table<br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-sort</span>=<span class="attr-value">"true"</span>&nbsp;<span
+            class="attr-name"
+            >data-gridix-sort-multi</span
+          >=<span class="attr-value">"true"</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-pagination</span>=<span class="attr-value">"true"</span
+          >&nbsp;<span class="attr-name">data-gridix-page-length</span>=<span class="attr-value">"4"</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-col-visibility</span>=<span class="attr-value">"true"</span
+          ><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-col-search</span>=<span class="attr-value">"true"</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-theme</span>=<span class="attr-value">"dark"</span><br />
+          &gt;
+        </div>
+
+        <table
+          data-gridix
+          data-gridix-sort="true"
+          data-gridix-sort-multi="true"
+          data-gridix-pagination="true"
+          data-gridix-page-length="4"
+          data-gridix-page-length-menu="4,8,16"
+          data-gridix-col-visibility="true"
+          data-gridix-col-search="true"
+          data-gridix-export="csv,json"
+          data-gridix-theme="dark"
+        >
+          <thead>
+            <tr>
+              <th data-gridix-col-type="number">ID</th>
+              <th>Project</th>
+              <th>Owner</th>
+              <th data-gridix-col-visible="false">Internal Code</th>
+              <th>Status</th>
+              <th data-gridix-col-type="number">Budget ($K)</th>
+              <th data-gridix-col-type="date">Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>201</td>
+              <td>Phoenix Relaunch</td>
+              <td>Alice Johnson</td>
+              <td>PHX-2024</td>
+              <td>On Track</td>
+              <td>450</td>
+              <td>2026-09-30</td>
+            </tr>
+            <tr>
+              <td>202</td>
+              <td>Atlas Migration</td>
+              <td>Bob Smith</td>
+              <td>ATL-2024</td>
+              <td>At Risk</td>
+              <td>820</td>
+              <td>2026-07-15</td>
+            </tr>
+            <tr>
+              <td>203</td>
+              <td>Orion Security Audit</td>
+              <td>Charlie Brown</td>
+              <td>ORI-2024</td>
+              <td>Complete</td>
+              <td>120</td>
+              <td>2026-03-01</td>
+            </tr>
+            <tr>
+              <td>204</td>
+              <td>Nexus Platform</td>
+              <td>Diana Prince</td>
+              <td>NEX-2025</td>
+              <td>On Track</td>
+              <td>1200</td>
+              <td>2027-01-01</td>
+            </tr>
+            <tr>
+              <td>205</td>
+              <td>Helios Dashboard</td>
+              <td>Eve Williams</td>
+              <td>HEL-2024</td>
+              <td>Delayed</td>
+              <td>340</td>
+              <td>2026-08-20</td>
+            </tr>
+            <tr>
+              <td>206</td>
+              <td>Vega API Gateway</td>
+              <td>Frank Castle</td>
+              <td>VEG-2025</td>
+              <td>On Track</td>
+              <td>580</td>
+              <td>2026-11-15</td>
+            </tr>
+            <tr>
+              <td>207</td>
+              <td>Pulsar CMS</td>
+              <td>Grace Hopper</td>
+              <td>PUL-2024</td>
+              <td>Complete</td>
+              <td>290</td>
+              <td>2026-04-30</td>
+            </tr>
+            <tr>
+              <td>208</td>
+              <td>Quasar Analytics</td>
+              <td>Hank Pym</td>
+              <td>QSR-2025</td>
+              <td>On Track</td>
+              <td>670</td>
+              <td>2026-12-31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table 3: empty-text demo -->
+      <div class="section">
+        <h2>Table 3 — <code>data-gridix-empty-text</code></h2>
+        <p>
+          Set a custom message for when the table has no rows — either because the data source returned nothing, or
+          because a search/filter produced zero matches. The table below starts empty so the message is visible
+          immediately. Try typing in Table 1's search box to produce zero results and see the same mechanism live.
+        </p>
+        <div class="attrs-block">
+          &lt;table<br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix</span><br />
+          &nbsp;&nbsp;<span class="attr-name">data-gridix-empty-text</span>=<span class="attr-value"
+            >"No records found. The data source returned no rows."</span
+          ><br />
+          &gt;
+        </div>
+
+        <table
+          data-gridix
+          data-gridix-sort="true"
+          data-gridix-search="true"
+          data-gridix-search-placeholder="Search (no data to find)…"
+          data-gridix-empty-text="No records found. The data source returned no rows."
+        >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- intentionally empty — demonstrates data-gridix-empty-text -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- AEM: CDN build auto-inits all [data-gridix] tables — no JS needed from the author -->
+    <script type="module">
+      import '/src/cdn.ts';
+    </script>
+  </body>
+</html>

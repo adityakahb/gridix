@@ -1,0 +1,223 @@
+/**
+ * Gridix v1.0.0 — table styles.
+ *
+ * All rules are scoped under .gridix-wrapper so they cannot leak into the
+ * host page. Uses CSS logical properties (padding-inline-*, inset-inline-*)
+ * for RTL language support.
+ *
+ * Mobile-first: default styles suit narrow viewports. Desktop enhancements
+ * are applied at @media (min-width: 1280px).
+ */
+
+.gridix-wrapper {
+  /**
+   * The <table> element itself.
+   * border-collapse: collapse removes double borders between adjacent cells.
+   */
+  & .gridix-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: var(--gridix-color-bg);
+
+    /* ── Table head ────────────────────────────────────────────────────── */
+
+    & thead {
+      background: var(--gridix-color-header-bg);
+
+      & th,
+      & td {
+        padding: var(--gridix-cell-py) var(--gridix-cell-px);
+        font-weight: 600;
+        text-align: start;
+        white-space: nowrap;
+        border-bottom: 2px solid var(--gridix-color-border);
+        vertical-align: middle;
+        user-select: none;
+      }
+    }
+
+    /* ── Table body ────────────────────────────────────────────────────── */
+
+    & tbody {
+      & tr {
+        border-bottom: 1px solid var(--gridix-color-border);
+
+        /**
+         * Transition is opt-in — only applied when the user has not requested
+         * reduced motion. This prevents vestibular-disorder triggers.
+         */
+        @media (prefers-reduced-motion: no-preference) {
+          transition: background 0.1s;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        /* Zebra striping for even rows. */
+        &:nth-child(even) {
+          background: var(--gridix-color-stripe-bg);
+        }
+
+        &:hover {
+          background: var(--gridix-color-hover-bg);
+        }
+
+        &.gridix-row--selected {
+          background: var(--gridix-color-selected-bg);
+        }
+      }
+
+      & td {
+        padding: var(--gridix-cell-py) var(--gridix-cell-px);
+        vertical-align: middle;
+      }
+    }
+
+    /* ── Sortable column headers ────────────────────────────────────────── */
+
+    /**
+     * Sortable <th> elements get extra end-padding to accommodate the sort
+     * indicator arrow. Uses padding-inline-end for RTL support.
+     */
+    & .gridix-th--sortable {
+      cursor: pointer;
+      position: relative;
+
+      /* Reserve space for the 18px sort indicator arrow. */
+      padding-inline-end: calc(var(--gridix-cell-px) + 18px);
+
+      &:hover {
+        background: var(--gridix-color-hover-bg);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--gridix-color-accent);
+        outline-offset: 2px;
+      }
+
+      /**
+       * Sort indicator arrows — purely decorative (aria-hidden="true").
+       * Uses CSS borders to draw up/down triangles without additional images.
+       * inset-inline-end ensures correct positioning in both LTR and RTL.
+       */
+      & .gridix-sort-indicator {
+        position: absolute;
+        inset-inline-end: var(--gridix-cell-px);
+        top: 50%;
+        transform: translateY(-50%);
+        display: inline-flex;
+        flex-direction: column;
+        gap: 1px;
+        opacity: 0.35;
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          border-inline: 4px solid transparent;
+        }
+
+        /* Up arrow (ascending indicator). */
+        &::before {
+          border-bottom: 4px solid currentcolor;
+        }
+
+        /* Down arrow (descending indicator). */
+        &::after {
+          border-top: 4px solid currentcolor;
+        }
+
+        /**
+         * Windows High Contrast Mode: replace CSS-color borders with system
+         * color keywords so the arrows remain visible.
+         */
+        @media (forced-colors: active) {
+          &::before {
+            border-bottom-color: ButtonText;
+          }
+
+          &::after {
+            border-top-color: ButtonText;
+          }
+        }
+      }
+
+      /* Active ascending sort: dim the down arrow. */
+      &.gridix-th--asc .gridix-sort-indicator {
+        opacity: 1;
+
+        &::after {
+          opacity: 0.3;
+        }
+      }
+
+      /* Active descending sort: dim the up arrow. */
+      &.gridix-th--desc .gridix-sort-indicator {
+        opacity: 1;
+
+        &::before {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    /* ── Hidden columns ─────────────────────────────────────────────────── */
+
+    /** Class toggled by applyColVisibility() for hidden columns. */
+    & .gridix-col--hidden {
+      display: none;
+    }
+
+    /* ── Checkbox column (row selection) ────────────────────────────────── */
+
+    & .gridix-checkbox-col {
+      width: 40px;
+      text-align: center;
+      padding-inline: 8px;
+    }
+
+    /* ── Per-column search row ──────────────────────────────────────────── */
+
+    & .gridix-col-search-row td {
+      padding: 4px var(--gridix-cell-px);
+      background: var(--gridix-color-header-bg);
+      border-bottom: 1px solid var(--gridix-color-border);
+    }
+
+    /* ── Empty state row ────────────────────────────────────────────────── */
+
+    & .gridix-empty-row td {
+      text-align: center;
+      padding: 2rem var(--gridix-cell-px);
+      color: var(--gridix-color-text-muted);
+      font-style: italic;
+    }
+
+    /* ── Search highlight ───────────────────────────────────────────────── */
+
+    /**
+     * <mark> elements injected by highlightCells() around matched search terms.
+     * Contrast ratio of highlight-bg / highlight-text ≥ 7.2:1.
+     */
+    & .gridix-highlight {
+      background: var(--gridix-color-highlight-bg);
+      color: var(--gridix-color-highlight-text);
+      border-radius: 2px;
+      padding: 0 2px;
+
+      /**
+       * Windows High Contrast Mode: use system Highlight/MarkText keywords
+       * so search highlights remain visible.
+       */
+      @media (forced-colors: active) {
+        forced-color-adjust: none;
+        background: Mark;
+        color: MarkText;
+      }
+    }
+  }
+}
