@@ -1,0 +1,89 @@
+/**
+ * Gridix v1.0.0 — print styles.
+ *
+ * Optimises Gridix tables for hard-copy printing:
+ * - Remove toolbar, pagination, and export controls (not useful on paper)
+ * - Expand all rows (disable pagination — show full dataset)
+ * - Use high-contrast black-on-white palette
+ * - Force table borders visible
+ * - Prevent rows from splitting across page breaks
+ *
+ * To apply print styles, include this file alongside the main gridix.css.
+ */
+
+@media print {
+  /* ── Hide interactive controls ──────────────────────────────────────── */
+
+  .gridix-toolbar,
+  .gridix-footer {
+    display: none !important;
+  }
+
+  /* ── Remove scroll container constraints ────────────────────────────── */
+
+  .gridix-scroll {
+    overflow: visible !important;
+  }
+
+  .gridix-wrapper {
+    contain: none !important;
+
+    /* ── Reset to print-safe colors ───────────────────────────────────── */
+
+    --gridix-color-text: #000;
+    --gridix-color-text-muted: #333;
+    --gridix-color-bg: #fff;
+    --gridix-color-border: #000;
+    --gridix-color-header-bg: #f0f0f0;
+    --gridix-color-stripe-bg: #fafafa;
+    --gridix-color-hover-bg: transparent;
+    --gridix-color-selected-bg: #e0e8ff;
+    --gridix-color-accent: #000;
+    --gridix-color-highlight-bg: #ff0;
+    --gridix-color-highlight-text: #000;
+
+    & .gridix-table {
+      width: 100% !important;
+      min-width: 0 !important;
+
+      /* Force visible borders in print mode. */
+      & th,
+      & td {
+        border: 1px solid #000 !important;
+      }
+
+      /* Avoid splitting across pages and ensure all rows are visible. */
+      & tbody tr {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        display: table-row !important;
+      }
+
+      /* Keep the header row on every printed page. */
+      & thead {
+        display: table-header-group;
+      }
+
+      /* Force background colors to print (header row, stripes). */
+      & thead th,
+      & tbody tr:nth-child(even) {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Sort indicators are not useful on paper. */
+      & .gridix-sort-indicator {
+        display: none;
+      }
+    }
+
+    /* ── Highlight marks ────────────────────────────────────────────────── */
+
+    & .gridix-highlight {
+      background: #ff0;
+      color: #000;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+}

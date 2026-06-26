@@ -1,0 +1,1 @@
+- [Gridix project](project-gridix.md) — Build, naming rules, CDN vs ESM split, responsive width strategy, Vite root gotcha.

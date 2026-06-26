@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix themes demo — default, minimal, and dark themes side by side. All colours are CSS custom properties, overridable per-component without any build step."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>Gridix — Themes</title>
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+      .demo-nav a:hover {
+        color: #fff;
+      }
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+      .demo-body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.5rem;
+      }
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 32px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      .themes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 32px;
+      }
+      .theme-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .theme-card.dark-card {
+        background: #0f172a;
+        border-color: #1e293b;
+      }
+      .theme-label {
+        padding: 12px 16px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-bottom: 1px solid #e2e8f0;
+        background: #fff;
+      }
+      .theme-card.dark-card .theme-label {
+        background: #0f172a;
+        color: #94a3b8;
+        border-color: #1e293b;
+      }
+      .theme-label .theme-code {
+        font-weight: 400;
+        color: #94a3b8;
+        margin-left: 8px;
+        font-family: monospace;
+      }
+      .theme-body {
+        padding: 16px;
+        background: #fff;
+      }
+      .theme-card.dark-card .theme-body {
+        background: #0f172a;
+      }
+      .override-section {
+        margin-top: 48px;
+        padding-top: 32px;
+        border-top: 1px solid #e2e8f0;
+      }
+      .override-section h2 {
+        font-size: 1.1rem;
+        margin: 0 0 8px;
+      }
+      .override-section p {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin: 0 0 20px;
+      }
+      .custom-theme-demo {
+        --gridix-accent: #8b5cf6;
+        --gridix-color-header-bg: #faf5ff;
+        --gridix-color-border: #e9d5ff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="demo-nav">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <div class="demo-body">
+      <h1>Themes</h1>
+      <p class="demo-desc">
+        Three built-in themes set via <code>data-gridix-theme</code>. All colours are CSS custom properties
+        (<code>--gridix-accent</code>, <code>--gridix-color-border</code>, etc.) so any theme can be overridden
+        per-component in AEM without any build step — demonstrated in the custom override section below.
+      </p>
+
+      <div class="themes-grid">
+        <!-- Default -->
+        <div class="theme-card">
+          <div class="theme-label">Default <span class="theme-code">data-gridix-theme="default"</span></div>
+          <div class="theme-body">
+            <table
+              data-gridix
+              data-gridix-theme="default"
+              data-gridix-sort="true"
+              data-gridix-search="true"
+              data-gridix-pagination="true"
+              data-gridix-page-length="4"
+            >
+              <thead>
+                <tr>
+                  <th data-gridix-col-type="number">ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th data-gridix-col-type="number">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Alice</td>
+                  <td>Engineer</td>
+                  <td>94</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Bob</td>
+                  <td>Manager</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Charlie</td>
+                  <td>Designer</td>
+                  <td>91</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Diana</td>
+                  <td>DevOps</td>
+                  <td>88</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Eve</td>
+                  <td>HR Lead</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Frank</td>
+                  <td>Analyst</td>
+                  <td>83</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Minimal -->
+        <div class="theme-card">
+          <div class="theme-label">Minimal <span class="theme-code">data-gridix-theme="minimal"</span></div>
+          <div class="theme-body">
+            <table
+              data-gridix
+              data-gridix-theme="minimal"
+              data-gridix-sort="true"
+              data-gridix-search="true"
+              data-gridix-pagination="true"
+              data-gridix-page-length="4"
+            >
+              <thead>
+                <tr>
+                  <th data-gridix-col-type="number">ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th data-gridix-col-type="number">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Alice</td>
+                  <td>Engineer</td>
+                  <td>94</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Bob</td>
+                  <td>Manager</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Charlie</td>
+                  <td>Designer</td>
+                  <td>91</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Diana</td>
+                  <td>DevOps</td>
+                  <td>88</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Eve</td>
+                  <td>HR Lead</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Frank</td>
+                  <td>Analyst</td>
+                  <td>83</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Dark -->
+        <div class="theme-card dark-card">
+          <div class="theme-label">Dark <span class="theme-code">data-gridix-theme="dark"</span></div>
+          <div class="theme-body">
+            <table
+              data-gridix
+              data-gridix-theme="dark"
+              data-gridix-sort="true"
+              data-gridix-search="true"
+              data-gridix-pagination="true"
+              data-gridix-page-length="4"
+            >
+              <thead>
+                <tr>
+                  <th data-gridix-col-type="number">ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th data-gridix-col-type="number">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Alice</td>
+                  <td>Engineer</td>
+                  <td>94</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Bob</td>
+                  <td>Manager</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Charlie</td>
+                  <td>Designer</td>
+                  <td>91</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Diana</td>
+                  <td>DevOps</td>
+                  <td>88</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Eve</td>
+                  <td>HR Lead</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Frank</td>
+                  <td>Analyst</td>
+                  <td>83</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom CSS var override -->
+      <div class="override-section">
+        <h2>Custom override via CSS custom properties</h2>
+        <p>
+          Setting <code>--gridix-accent: #8b5cf6</code> and <code>--gridix-color-header-bg: #faf5ff</code>
+          on a wrapper element re-themes the table without touching the theme attribute. In AEM this can be done via an
+          inline style on the component container.
+        </p>
+        <div class="custom-theme-demo">
+          <table
+            data-gridix
+            data-gridix-sort="true"
+            data-gridix-search="true"
+            data-gridix-pagination="true"
+            data-gridix-page-length="4"
+          >
+            <thead>
+              <tr>
+                <th data-gridix-col-type="number">ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th data-gridix-col-type="number">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Alice</td>
+                <td>Engineer</td>
+                <td>94</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Bob</td>
+                <td>Manager</td>
+                <td>87</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Charlie</td>
+                <td>Designer</td>
+                <td>91</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Diana</td>
+                <td>DevOps</td>
+                <td>88</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Eve</td>
+                <td>HR Lead</td>
+                <td>76</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Frank</td>
+                <td>Analyst</td>
+                <td>83</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Gridix } from '/src/index.ts';
+      document.querySelectorAll('table[data-gridix]').forEach(t => new Gridix(t));
+    </script>
+  </body>
+</html>

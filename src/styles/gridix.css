@@ -1,0 +1,35 @@
+/**
+ * Gridix v1.0.0 — main CSS entry point.
+ *
+ * Imports all partials in dependency order. The @import statements are
+ * resolved at build time by lightningcss into a single output file.
+ *
+ * Output files produced by `npm run build:css`:
+ *   dist/styles/gridix.css      — unminified with sourcemap
+ *   dist/styles/gridix.min.css  — minified, no sourcemap
+ *
+ * Usage:
+ *   import 'gridix/style';           // bundler
+ *   <link rel="stylesheet" href="dist/styles/gridix.css">  // direct
+ */
+
+/* Design tokens — must be imported first so all partials can use them. */
+@import url("./variables.css");
+
+/* Layout and containment. */
+@import url("./base.css");
+
+/* Table, header, body, sort indicators, highlights. */
+@import url("./table.css");
+
+/* Toolbar, search input, col-visibility and export dropdowns. */
+@import url("./toolbar.css");
+
+/* Footer, page-info text, pagination buttons. */
+@import url("./pagination.css");
+
+/* Theme overrides — minimal, dark, and auto dark mode. */
+@import url("./themes.css");
+
+/* Print styles — optional, included for completeness. */
+@import url("./print.css");

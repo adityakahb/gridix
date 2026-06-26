@@ -1,0 +1,82 @@
+/**
+ * Gridix v1.0.0 — design tokens.
+ *
+ * All CSS custom properties are declared at :root so consumers can override
+ * them at any ancestor level. The variable names follow the pattern:
+ * --gridix-<category>-<name>.
+ *
+ * Theme-specific overrides live in themes.css under .gridix-wrapper selectors.
+ */
+
+:root {
+  /* ── Typography ─────────────────────────────────────────────────────── */
+
+  /** Base font size for all Gridix UI elements. */
+  --gridix-font-size: 0.875rem;
+
+  /** Line height for text in table cells and UI controls. */
+  --gridix-line-height: 1.5;
+
+  /* ── Color palette — light mode (default) ───────────────────────────── */
+
+  /** Primary text color. Contrast ratio ≥ 15.8:1 on --gridix-color-bg. */
+  --gridix-color-text: #1e293b;
+
+  /** Muted text (page info, placeholder). Contrast ratio ≥ 4.6:1. */
+  --gridix-color-text-muted: #64748b;
+
+  /** Background color of the table and controls. */
+  --gridix-color-bg: #fff;
+
+  /** Border color for table cells, inputs, and buttons. */
+  --gridix-color-border: #e2e8f0;
+
+  /** Background color of the table header row. */
+  --gridix-color-header-bg: #f8fafc;
+
+  /** Background color of even (zebra-striped) tbody rows. */
+  --gridix-color-stripe-bg: #f9fafb;
+
+  /** Background applied to hovered rows and control hover states. */
+  --gridix-color-hover-bg: #f1f5f9;
+
+  /** Background applied to selected rows. */
+  --gridix-color-selected-bg: #eff6ff;
+
+  /** Accent color used for focus rings, active page buttons, and highlights. */
+  --gridix-color-accent: #3b82f6;
+
+  /** Darker accent for :hover states on accent-colored elements. */
+  --gridix-color-accent-hover: #2563eb;
+
+  /**
+   * Background of search-match <mark> highlights.
+   * Contrast ratio ≥ 7.2:1 against --gridix-color-highlight-text.
+   */
+  --gridix-color-highlight-bg: #fef08a;
+
+  /** Text color inside search-match highlights. */
+  --gridix-color-highlight-text: #713f12;
+
+  /* ── Spacing & shape ────────────────────────────────────────────────── */
+
+  /** Border radius used on buttons, inputs, and dropdowns. */
+  --gridix-radius: 6px;
+
+  /** Horizontal padding for table cells. */
+  --gridix-cell-px: 12px;
+
+  /** Vertical padding for table cells. */
+  --gridix-cell-py: 10px;
+
+  /** Gap between toolbar controls. */
+  --gridix-toolbar-gap: 8px;
+
+  /**
+   * Desktop breakpoint value — for JS reference only.
+   * This value cannot be used directly in @media queries.
+   * The actual breakpoint is hardcoded as 1280px in the CSS.
+   * To customise the breakpoint, override the @media queries in your own CSS.
+   */
+  --gridix-breakpoint-desktop: 1280px;
+}

@@ -1,0 +1,74 @@
+/**
+ * Gridix v1.0.0 — base styles.
+ *
+ * The outermost container is .gridix-wrapper. All rules are nested inside it
+ * so they are scoped to Gridix-managed content only.
+ *
+ * Utilities:
+ *   .gridix-sr-only  — visually hidden, accessible to screen readers
+ *   .gridix-scroll   — horizontally scrollable container for the table
+ */
+
+.gridix-wrapper {
+  box-sizing: border-box;
+  font-size: var(--gridix-font-size);
+  line-height: var(--gridix-line-height);
+  color: var(--gridix-color-text);
+  background: var(--gridix-color-bg);
+  position: relative;
+
+  /**
+   * contain: layout style isolates layout and style recalculations to this
+   * subtree, improving rendering performance on pages with many Gridix tables.
+   */
+  contain: layout style;
+
+  /* Inherit box-sizing in all descendants. */
+  & *,
+  & *::before,
+  & *::after {
+    box-sizing: inherit;
+  }
+}
+
+/**
+ * Screen-reader-only utility.
+ * Used by announce.ts live region and other visually-hidden elements.
+ */
+.gridix-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/**
+ * Horizontally scrollable wrapper for the table.
+ * overflow-anchor: none prevents scroll-position jumps when rows are
+ * toggled above the viewport during pagination or filtering.
+ */
+.gridix-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-anchor: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gridix-color-border) transparent;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--gridix-color-border);
+    border-radius: 3px;
+  }
+}

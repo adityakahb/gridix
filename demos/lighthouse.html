@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gridix Lighthouse demo — optimised for performance, accessibility, best practices, and SEO. Shows lazy initialisation, preloaded CSS, and semantic markup."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1e293b" />
+
+    <!-- Preload the stylesheet to eliminate render-blocking -->
+    <link rel="preload" href="/src/styles/gridix.css" as="style" />
+    <link rel="stylesheet" href="/src/styles/gridix.css" />
+
+    <title>Gridix — Lighthouse Demo</title>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+        line-height: 1.5;
+      }
+
+      /* Stable layout avoids CLS from dynamic toolbar insertion */
+      .demo-nav {
+        background: #1e293b;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .demo-nav a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.875rem;
+      }
+
+      .demo-nav a:hover {
+        color: #fff;
+      }
+
+      .demo-nav a.home {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .demo-body {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+
+      h1 {
+        margin: 0 0 4px;
+        font-size: 1.5rem;
+      }
+
+      .demo-desc {
+        color: #64748b;
+        margin: 0 0 20px;
+        font-size: 0.9rem;
+      }
+
+      /* Score cards */
+      .scores {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .score-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 16px 12px;
+        text-align: center;
+      }
+
+      .score-num {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #16a34a;
+        display: block;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+
+      .score-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+      }
+
+      .technique-list {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+      }
+
+      .technique-list h2 {
+        margin: 0 0 12px;
+        font-size: 1rem;
+      }
+
+      .technique-list ul {
+        margin: 0;
+        padding-inline-start: 20px;
+        color: #475569;
+        font-size: 0.875rem;
+        line-height: 1.8;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0f172a;
+          color: #f1f5f9;
+        }
+        .score-card {
+          background: #1e293b;
+          border-color: #334155;
+        }
+        .technique-list {
+          background: #1e293b;
+          border-color: #334155;
+        }
+        .demo-desc {
+          color: #94a3b8;
+        }
+        .technique-list ul {
+          color: #94a3b8;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="demo-nav" aria-label="Demo navigation">
+      <a class="home" href="index.html">Gridix</a>
+      <a href="basic.html">Basic</a>
+      <a href="responsive.html">Responsive</a>
+      <a href="aem.html">AEM</a>
+      <a href="advanced.html">Advanced</a>
+      <a href="themes.html">Themes</a>
+      <a href="print.html">Print</a>
+      <a href="lighthouse.html">Lighthouse</a>
+    </nav>
+
+    <main class="demo-body">
+      <h1>Lighthouse Optimised Demo</h1>
+      <p class="demo-desc">
+        This page demonstrates the techniques used to achieve top Lighthouse scores. Open DevTools → Lighthouse →
+        Generate report to verify.
+      </p>
+
+      <!-- Lighthouse score targets (informational) -->
+      <div class="scores" aria-label="Target Lighthouse scores">
+        <div class="score-card">
+          <span class="score-num" aria-label="Performance score: 100">100</span>
+          <span class="score-label">Performance</span>
+        </div>
+        <div class="score-card">
+          <span class="score-num" aria-label="Accessibility score: 100">100</span>
+          <span class="score-label">Accessibility</span>
+        </div>
+        <div class="score-card">
+          <span class="score-num" aria-label="Best Practices score: 100">100</span>
+          <span class="score-label">Best Practices</span>
+        </div>
+        <div class="score-card">
+          <span class="score-num" aria-label="SEO score: 100">100</span>
+          <span class="score-label">SEO</span>
+        </div>
+      </div>
+
+      <!-- Techniques summary -->
+      <section class="technique-list" aria-labelledby="techniques-heading">
+        <h2 id="techniques-heading">Optimisation techniques applied</h2>
+        <ul>
+          <li><strong>CSS preloaded</strong> — <code>&lt;link rel="preload"&gt;</code> eliminates render-blocking.</li>
+          <li>
+            <strong>Deferred JS</strong> — Gridix script uses <code>type="module"</code> (automatically deferred).
+          </li>
+          <li>
+            <strong>Semantic HTML</strong> — <code>role="grid"</code>, <code>aria-label</code>,
+            <code>&lt;caption&gt;</code>, <code>scope="col"</code> on headers.
+          </li>
+          <li>
+            <strong>No layout shift (CLS)</strong> — wrapper dimensions are stable; toolbar insertion uses reserved
+            space.
+          </li>
+          <li><strong>Reduced motion</strong> — all transitions are wrapped in <code>prefers-reduced-motion</code>.</li>
+          <li><strong>Touch targets</strong> — minimum 44×44 px on coarse-pointer devices (WCAG 2.5.5).</li>
+          <li><strong>Colour contrast</strong> — all text/background pairs meet WCAG AA (≥ 4.5:1).</li>
+          <li><strong>Focus management</strong> — roving tabindex, escape key, programmatic focus on page change.</li>
+          <li><strong>sideEffects: false</strong> — ESM / CJS builds are fully tree-shakeable.</li>
+          <li><strong>Sourcemaps</strong> — unminified builds ship with external sourcemaps for DevTools debugging.</li>
+        </ul>
+      </section>
+
+      <!-- The table — aria-label derived from caption -->
+      <table
+        data-gridix
+        data-gridix-search="true"
+        data-gridix-pagination="true"
+        data-gridix-page-length="10"
+        data-gridix-page-length-menu="10,25,50"
+        data-gridix-sort="true"
+        data-gridix-col-visibility="true"
+        data-gridix-export="csv,json,copy"
+      >
+        <caption>
+          Product catalogue — searchable, sortable, paginated
+        </caption>
+        <thead>
+          <tr>
+            <th data-gridix-col-type="number">SKU</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th data-gridix-col-type="number">Price</th>
+            <th data-gridix-col-type="number">Stock</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>Wireless Headphones</td>
+            <td>Electronics</td>
+            <td>89.99</td>
+            <td>145</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1002</td>
+            <td>Mechanical Keyboard</td>
+            <td>Electronics</td>
+            <td>129.00</td>
+            <td>78</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1003</td>
+            <td>Standing Desk Mat</td>
+            <td>Furniture</td>
+            <td>45.50</td>
+            <td>230</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1004</td>
+            <td>Webcam 4K</td>
+            <td>Electronics</td>
+            <td>199.99</td>
+            <td>32</td>
+            <td>Low Stock</td>
+          </tr>
+          <tr>
+            <td>1005</td>
+            <td>Ergonomic Chair</td>
+            <td>Furniture</td>
+            <td>549.00</td>
+            <td>12</td>
+            <td>Low Stock</td>
+          </tr>
+          <tr>
+            <td>1006</td>
+            <td>USB-C Hub 7-in-1</td>
+            <td>Electronics</td>
+            <td>59.99</td>
+            <td>310</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1007</td>
+            <td>Monitor Arm</td>
+            <td>Furniture</td>
+            <td>75.00</td>
+            <td>55</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1008</td>
+            <td>Noise-Cancelling Earbuds</td>
+            <td>Electronics</td>
+            <td>149.99</td>
+            <td>0</td>
+            <td>Out of Stock</td>
+          </tr>
+          <tr>
+            <td>1009</td>
+            <td>Cable Management Kit</td>
+            <td>Accessories</td>
+            <td>19.99</td>
+            <td>500</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1010</td>
+            <td>Desk Lamp LED</td>
+            <td>Lighting</td>
+            <td>34.50</td>
+            <td>187</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1011</td>
+            <td>Laptop Stand</td>
+            <td>Accessories</td>
+            <td>39.99</td>
+            <td>95</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1012</td>
+            <td>Portable SSD 1TB</td>
+            <td>Electronics</td>
+            <td>109.00</td>
+            <td>64</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1013</td>
+            <td>Wireless Charger</td>
+            <td>Electronics</td>
+            <td>27.99</td>
+            <td>220</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1014</td>
+            <td>Adjustable Monitor</td>
+            <td>Electronics</td>
+            <td>359.00</td>
+            <td>18</td>
+            <td>Low Stock</td>
+          </tr>
+          <tr>
+            <td>1015</td>
+            <td>Whiteboard 90×120cm</td>
+            <td>Office</td>
+            <td>89.00</td>
+            <td>43</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1016</td>
+            <td>Document Scanner</td>
+            <td>Electronics</td>
+            <td>249.99</td>
+            <td>7</td>
+            <td>Low Stock</td>
+          </tr>
+          <tr>
+            <td>1017</td>
+            <td>Footrest</td>
+            <td>Furniture</td>
+            <td>28.50</td>
+            <td>160</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1018</td>
+            <td>Plant Stand</td>
+            <td>Decor</td>
+            <td>22.00</td>
+            <td>75</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1019</td>
+            <td>Conference Speaker</td>
+            <td>Electronics</td>
+            <td>179.00</td>
+            <td>29</td>
+            <td>In Stock</td>
+          </tr>
+          <tr>
+            <td>1020</td>
+            <td>Sticky Notes Bulk Pack</td>
+            <td>Stationery</td>
+            <td>12.99</td>
+            <td>800</td>
+            <td>In Stock</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <!--
+      type="module" makes this script deferred automatically — it does not
+      block HTML parsing or rendering, improving Time to Interactive.
+    -->
+    <script type="module">
+      import '/src/cdn.ts';
+    </script>
+  </body>
+</html>

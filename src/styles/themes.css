@@ -1,0 +1,98 @@
+/**
+ * Gridix v1.0.0 — theme overrides.
+ *
+ * Three themes are provided:
+ *   default  — clean light theme (the baseline styles in other CSS files)
+ *   minimal  — borderless / flat layout; uppercase headers
+ *   dark     — dark background with adjusted color palette
+ *
+ * Theme is applied via data-gridix-theme on .gridix-wrapper. Example:
+ *   <div class="gridix-wrapper" data-gridix-theme="dark">
+ *
+ * In addition, the "default" and "minimal" themes automatically adopt dark
+ * colors when the user's system preference is dark (prefers-color-scheme:
+ * dark). This auto-dark mode can be overridden by explicitly setting
+ * data-gridix-theme="dark" or "light" on a parent element.
+ */
+
+/* ── Automatic dark mode ──────────────────────────────────────────────── */
+
+/**
+ * When the OS/browser is in dark mode and no explicit dark theme is set,
+ * the default and minimal themes inherit these overrides automatically.
+ */
+@media (prefers-color-scheme: dark) {
+  .gridix-wrapper[data-gridix-theme="default"],
+  .gridix-wrapper[data-gridix-theme="minimal"] {
+    --gridix-color-text: #f1f5f9;
+    --gridix-color-text-muted: #94a3b8;
+    --gridix-color-bg: #1e293b;
+    --gridix-color-border: #334155;
+    --gridix-color-header-bg: #0f172a;
+    --gridix-color-stripe-bg: #172033;
+    --gridix-color-hover-bg: #293548;
+    --gridix-color-selected-bg: #1e3a5f;
+    --gridix-color-accent: #60a5fa;
+    --gridix-color-accent-hover: #93c5fd;
+    --gridix-color-highlight-bg: #854d0e;
+    --gridix-color-highlight-text: #fef3c7;
+  }
+}
+
+/* ── Minimal theme ────────────────────────────────────────────────────── */
+
+/**
+ * A flatter, border-reduced variant suitable for content-heavy pages where
+ * the table should recede visually.
+ */
+.gridix-wrapper[data-gridix-theme="minimal"] {
+  --gridix-color-header-bg: transparent;
+  --gridix-color-stripe-bg: transparent;
+  --gridix-color-hover-bg: #f8fafc;
+  --gridix-color-border: #cbd5e1;
+
+  & .gridix-table {
+    & thead th {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom-width: 1px;
+    }
+
+    & tbody tr {
+      border-bottom-color: #f1f5f9;
+    }
+  }
+
+  & .gridix-page-btn {
+    border: none;
+    border-radius: 4px;
+
+    &.gridix-page-btn--active {
+      background: var(--gridix-color-text);
+      color: #fff;
+    }
+  }
+}
+
+/* ── Dark theme (explicit) ────────────────────────────────────────────── */
+
+/**
+ * Explicit dark theme — always dark regardless of OS preference.
+ * Use data-gridix-theme="dark" on the wrapper or a parent element.
+ */
+.gridix-wrapper[data-gridix-theme="dark"] {
+  --gridix-color-text: #f1f5f9;
+  --gridix-color-text-muted: #94a3b8;
+  --gridix-color-bg: #1e293b;
+  --gridix-color-border: #334155;
+  --gridix-color-header-bg: #0f172a;
+  --gridix-color-stripe-bg: #172033;
+  --gridix-color-hover-bg: #293548;
+  --gridix-color-selected-bg: #1e3a5f;
+  --gridix-color-accent: #60a5fa;
+  --gridix-color-accent-hover: #93c5fd;
+  --gridix-color-highlight-bg: #854d0e;
+  --gridix-color-highlight-text: #fef3c7;
+}
