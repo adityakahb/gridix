@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.96% </span>
+                <span class="strong">98.99% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>768/776</span>
+                <span class='fraction'>785/793</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.96% </span>
+                <span class="strong">98.99% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>768/776</span>
+                <span class='fraction'>785/793</span>
             </div>
         
             
@@ -839,7 +839,24 @@
 <a name='L774'></a><a href='#L774'>774</a>
 <a name='L775'></a><a href='#L775'>775</a>
 <a name='L776'></a><a href='#L776'>776</a>
-<a name='L777'></a><a href='#L777'>777</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L777'></a><a href='#L777'>777</a>
+<a name='L778'></a><a href='#L778'>778</a>
+<a name='L779'></a><a href='#L779'>779</a>
+<a name='L780'></a><a href='#L780'>780</a>
+<a name='L781'></a><a href='#L781'>781</a>
+<a name='L782'></a><a href='#L782'>782</a>
+<a name='L783'></a><a href='#L783'>783</a>
+<a name='L784'></a><a href='#L784'>784</a>
+<a name='L785'></a><a href='#L785'>785</a>
+<a name='L786'></a><a href='#L786'>786</a>
+<a name='L787'></a><a href='#L787'>787</a>
+<a name='L788'></a><a href='#L788'>788</a>
+<a name='L789'></a><a href='#L789'>789</a>
+<a name='L790'></a><a href='#L790'>790</a>
+<a name='L791'></a><a href='#L791'>791</a>
+<a name='L792'></a><a href='#L792'>792</a>
+<a name='L793'></a><a href='#L793'>793</a>
+<a name='L794'></a><a href='#L794'>794</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -913,6 +930,14 @@
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
@@ -991,10 +1016,17 @@
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-yes">66x</span>
@@ -1117,6 +1149,10 @@
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">70x</span>
 <span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -1322,8 +1358,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">28x</span>
@@ -1690,11 +1724,19 @@ export class GridixTable {
    */
   constructor(tableEl: HTMLTableElement, options: Partial&lt;GridixOptions&gt; = {}) {
     this.table = tableEl;
-    this.opts = { ...DEFAULTS, ...options, pagination: { ...DEFAULTS.pagination, ...options.pagination } };
+    this.opts = {
+      ...DEFAULTS,
+      ...options,
+      pagination: { ...DEFAULTS.pagination, ...options.pagination },
+    };
 &nbsp;
     // Data-attribute options from AEM always override programmatic defaults
     const attrOpts = parseOptions(tableEl);
-    this.opts = { ...this.opts, ...attrOpts, pagination: { ...this.opts.pagination, ...attrOpts.pagination } };
+    this.opts = {
+      ...this.opts,
+      ...attrOpts,
+      pagination: { ...this.opts.pagination, ...attrOpts.pagination },
+    };
 &nbsp;
     this.cols = parseCols(tableEl);
     const rows = parseRows(tableEl);
@@ -1738,7 +1780,11 @@ export class GridixTable {
 &nbsp;
     this.wrapper = el('div', { class: CSS.WRAPPER, 'data-gridix-theme': this.opts.theme });
     this.scrollEl = el('div', { class: CSS.SCROLL, tabindex: '-1' });
-    this.toolbar = el('div', { class: CSS.TOOLBAR, role: 'toolbar', 'aria-label': `${label} controls` });
+    this.toolbar = el('div', {
+      class: CSS.TOOLBAR,
+      role: 'toolbar',
+      'aria-label': `${label} controls`,
+    });
     this.footer = el('div', { class: CSS.FOOTER });
 &nbsp;
     this.table.parentNode!.insertBefore(this.wrapper, this.table);
@@ -1775,7 +1821,10 @@ export class GridixTable {
     const right = el('div', { class: CSS.TOOLBAR_RIGHT });
 &nbsp;
     if (this.opts.pagination.enabled) {
-      const sel = el('select', { class: CSS.PAGE_LENGTH_SEL, 'aria-label': 'Rows per page' }) as HTMLSelectElement;
+      const sel = el('select', {
+        class: CSS.PAGE_LENGTH_SEL,
+        'aria-label': 'Rows per page',
+      }) as HTMLSelectElement;
       this.opts.pagination.pageLengthMenu.forEach(n =&gt; {
         const opt = el('option', { value: String(n) }, String(n)) as HTMLOptionElement;
         if (n === this.opts.pagination.pageLength) opt.selected = true;
@@ -1918,7 +1967,11 @@ export class GridixTable {
     });
     menu.setAttribute('hidden', '');
 &nbsp;
-    const labels: Record&lt;ExportFormat, string&gt; = { csv: 'CSV', json: 'JSON', copy: 'Copy to clipboard' };
+    const labels: Record&lt;ExportFormat, string&gt; = {
+      csv: 'CSV',
+      json: 'JSON',
+      copy: 'Copy to clipboard',
+    };
     this.opts.export.forEach(fmt =&gt; {
       const item = el(
         'button',
@@ -2097,9 +2150,7 @@ export class GridixTable {
             ? selectAll(this.state.rows, this.table)
             : deselectAll(this.state.rows, this.table);
           announce(
-            allCb.checked
-              ? `All ${this.state.rows.length} rows selected`
-              : 'All rows deselected',
+            allCb.checked ? `All ${this.state.rows.length} rows selected` : 'All rows deselected',
           );
         });
         th.appendChild(allCb);
@@ -2398,7 +2449,7 @@ export class GridixTable {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-23T04:37:55.356Z
+                at 2026-06-26T13:37:03.274Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
