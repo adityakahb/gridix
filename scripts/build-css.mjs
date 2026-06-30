@@ -46,7 +46,7 @@ const mapStr = unminMap?.toString() ?? '';
 const outCss = join(outDir, 'gridix.css');
 const outMap = join(outDir, 'gridix.css.map');
 
-const banner = '/* Gridix v1.0.0 — https://github.com/adityakahb-cts/gridix */\n';
+const banner = '/* Gridix v1.0.0 — https://github.com/adityakahb/gridix */\n';
 writeFileSync(outCss, banner + cssStr + `\n/*# sourceMappingURL=gridix.css.map */\n`);
 writeFileSync(outMap, mapStr);
 console.log(`  ✓ dist/styles/gridix.css (+ .map)`);

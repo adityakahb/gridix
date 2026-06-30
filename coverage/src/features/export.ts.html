@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>193/193</span>
+                <span class='fraction'>189/189</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>193/193</span>
+                <span class='fraction'>189/189</span>
             </div>
         
             
@@ -252,11 +252,7 @@
 <a name='L187'></a><a href='#L187'>187</a>
 <a name='L188'></a><a href='#L188'>188</a>
 <a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a>
-<a name='L194'></a><a href='#L194'>194</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -310,8 +306,6 @@
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -361,8 +355,6 @@
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -383,6 +375,8 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -401,8 +395,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -502,9 +494,7 @@ function buildRows(
   cols: ColDef[],
   exportableCols: number[],
 ): string[][] {
-  return rows.map(row =&gt;
-    exportableCols.map(i =&gt; getCellText(row, i)),
-  );
+  return rows.map(row =&gt; exportableCols.map(i =&gt; getCellText(row, i)));
 }
 &nbsp;
 /**
@@ -550,9 +540,7 @@ export function exportCsv(
     return `"${safe.replace(/"/g, '""')}"`;
   };
 &nbsp;
-  const csv = [headers, ...data]
-    .map(r =&gt; r.map(escape).join(','))
-    .join('\r\n');
+  const csv = [headers, ...data].map(r =&gt; r.map(escape).join(',')).join('\r\n');
 &nbsp;
   download(csv, filename, 'text/csv;charset=utf-8;');
 }
@@ -575,7 +563,9 @@ export function exportJson(
   const headers = buildHeaders(cols, exportableCols);
   const data = buildRows(rows, cols, exportableCols).map(row =&gt; {
     const obj: Record&lt;string, string&gt; = {};
-    headers.forEach((h, i) =&gt; { obj[h] = row[i<span class="branch-0 cbranch-no" title="branch not covered" >] ?? ''; }</span>);
+    headers.forEach((h, i) =&gt; {
+      obj[h] = row[i<span class="branch-0 cbranch-no" title="branch not covered" >] ?? '';</span>
+    });
     return obj;
   });
   download(JSON.stringify(data, null, 2), filename, 'application/json');
@@ -600,9 +590,7 @@ export function copyToClipboard(
 ): void {
   const headers = buildHeaders(cols, exportableCols);
   const data = buildRows(rows, cols, exportableCols);
-  const text = [headers, ...data]
-    .map(r =&gt; r.map(sanitizeCsvValue).join('\t'))
-    .join('\n');
+  const text = [headers, ...data].map(r =&gt; r.map(sanitizeCsvValue).join('\t')).join('\n');
   navigator.clipboard?.writeText(text);
 }
 &nbsp;
@@ -620,7 +608,7 @@ export function runExport(
   cols: ColDef[],
   exportableCols: number[],
 ): void {
-  if (format === 'csv')  exportCsv(rows, cols, exportableCols);
+  if (format === 'csv') exportCsv(rows, cols, exportableCols);
   if (format === 'json') exportJson(rows, cols, exportableCols);
   if (format === 'copy') copyToClipboard(rows, cols, exportableCols);
 }
@@ -649,7 +637,7 @@ function download(content: string, filename: string, mime: string): void {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-23T04:37:55.356Z
+                at 2026-06-26T13:37:03.274Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

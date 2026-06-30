@@ -3,7 +3,7 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import dts from 'rollup-plugin-dts';
 
-const banner = `/*! Gridix v1.0.0 | MIT License | https://github.com/gridix-cts */`;
+const banner = `/*! Gridix v1.0.0 | MIT License | https://github.com/gridix */`;
 
 /** Shared plugins for every JS build (without terser — added per-output). */
 const sharedPlugins = [
