@@ -368,53 +368,53 @@
 export const ATTR = {
   // ── Table-level attributes (on &lt;table&gt;) ────────────────────────────────
   /** Marks the table for auto-initialisation by the CDN build. */
-  INIT:                  'data-gridix',
+  INIT: 'data-gridix',
   /** Enable (`"true"`) or disable global search. */
-  SEARCH:                'data-gridix-search',
+  SEARCH: 'data-gridix-search',
   /** Placeholder text for the global search input. */
-  SEARCH_PLACEHOLDER:    'data-gridix-search-placeholder',
+  SEARCH_PLACEHOLDER: 'data-gridix-search-placeholder',
   /** Enable (`"true"`) or disable pagination. */
-  PAGINATION:            'data-gridix-pagination',
+  PAGINATION: 'data-gridix-pagination',
   /** Rows per page (integer string). */
-  PAGE_LENGTH:           'data-gridix-page-length',
+  PAGE_LENGTH: 'data-gridix-page-length',
   /** Comma-separated list of page-length options, e.g. `"10,25,50,100"`. */
-  PAGE_LENGTH_MENU:      'data-gridix-page-length-menu',
+  PAGE_LENGTH_MENU: 'data-gridix-page-length-menu',
   /** Enable column sorting. */
-  SORT:                  'data-gridix-sort',
+  SORT: 'data-gridix-sort',
   /** Allow multi-column sort via Shift+click. */
-  SORT_MULTI:            'data-gridix-sort-multi',
+  SORT_MULTI: 'data-gridix-sort-multi',
   /** Show the column visibility toggle button. */
-  COL_VISIBILITY:        'data-gridix-col-visibility',
+  COL_VISIBILITY: 'data-gridix-col-visibility',
   /** Comma-separated export formats: `"csv,json,copy"`. */
-  EXPORT:                'data-gridix-export',
+  EXPORT: 'data-gridix-export',
   /** Row selection mode: `"single"` or `"multi"`. */
-  ROW_SELECT:            'data-gridix-row-select',
+  ROW_SELECT: 'data-gridix-row-select',
   /** Stick the `&lt;thead&gt;` row to the top of the scroll container. */
-  FIXED_HEADER:          'data-gridix-fixed-header',
+  FIXED_HEADER: 'data-gridix-fixed-header',
   /** Top offset (px) for the sticky header, e.g. `"60"`. */
-  FIXED_HEADER_OFFSET:   'data-gridix-fixed-header-offset',
+  FIXED_HEADER_OFFSET: 'data-gridix-fixed-header-offset',
   /** Show per-column filter inputs below the header row. */
-  COL_SEARCH:            'data-gridix-col-search',
+  COL_SEARCH: 'data-gridix-col-search',
   /** Custom message shown when no rows match. */
-  EMPTY_TEXT:            'data-gridix-empty-text',
+  EMPTY_TEXT: 'data-gridix-empty-text',
   /** Visual theme: `"default"`, `"minimal"`, or `"dark"`. */
-  THEME:                 'data-gridix-theme',
+  THEME: 'data-gridix-theme',
 &nbsp;
   // ── Column-level attributes (on &lt;th&gt;) ──────────────────────────────────
   /** Column data type: `"string"`, `"number"`, or `"date"`. */
-  COL_TYPE:              'data-gridix-col-type',
+  COL_TYPE: 'data-gridix-col-type',
   /** Set to `"false"` to prevent this column from being sorted. */
-  COL_SORTABLE:          'data-gridix-col-sortable',
+  COL_SORTABLE: 'data-gridix-col-sortable',
   /** Set to `"false"` to exclude this column from search matching. */
-  COL_SEARCHABLE:        'data-gridix-col-searchable',
+  COL_SEARCHABLE: 'data-gridix-col-searchable',
   /** Set to `"false"` to initially hide this column. */
-  COL_VISIBLE:           'data-gridix-col-visible',
+  COL_VISIBLE: 'data-gridix-col-visible',
   /** Fixed column width (CSS value, e.g. `"120px"`). */
-  COL_WIDTH:             'data-gridix-col-width',
+  COL_WIDTH: 'data-gridix-col-width',
   /** Extra CSS class appended to every cell in this column. */
-  COL_CLASS:             'data-gridix-col-class',
+  COL_CLASS: 'data-gridix-col-class',
   /** Set to `"true"` to exclude this column from exports. */
-  COL_NO_EXPORT:         'data-gridix-col-no-export',
+  COL_NO_EXPORT: 'data-gridix-col-no-export',
 } as const;
 &nbsp;
 /**
@@ -448,61 +448,61 @@ export const DEFAULTS: GridixOptions = {
  */
 export const CSS = {
   /** Outer `&lt;div&gt;` that wraps the table, toolbar, and footer. */
-  WRAPPER:         'gridix-wrapper',
+  WRAPPER: 'gridix-wrapper',
   /** Horizontally scrollable container that wraps the `&lt;table&gt;`. */
-  SCROLL:          'gridix-scroll',
+  SCROLL: 'gridix-scroll',
   /** Class added to the `&lt;table&gt;` element itself. */
-  TABLE:           'gridix-table',
+  TABLE: 'gridix-table',
   /** Toolbar `&lt;div&gt;` above the table containing search, buttons, and page-length. */
-  TOOLBAR:         'gridix-toolbar',
+  TOOLBAR: 'gridix-toolbar',
   /** Left section of the toolbar (page-length select). */
-  TOOLBAR_LEFT:    'gridix-toolbar-left',
+  TOOLBAR_LEFT: 'gridix-toolbar-left',
   /** Right section of the toolbar (search, col-vis, export). */
-  TOOLBAR_RIGHT:   'gridix-toolbar-right',
+  TOOLBAR_RIGHT: 'gridix-toolbar-right',
   /** Global search `&lt;input&gt;`. */
-  SEARCH_INPUT:    'gridix-search-input',
+  SEARCH_INPUT: 'gridix-search-input',
   /** Column-visibility toggle `&lt;button&gt;`. */
-  COL_VIS_BTN:     'gridix-col-vis-btn',
+  COL_VIS_BTN: 'gridix-col-vis-btn',
   /** Column-visibility dropdown `&lt;div&gt;`. */
-  COL_VIS_DROPDOWN:'gridix-col-vis-dropdown',
+  COL_VIS_DROPDOWN: 'gridix-col-vis-dropdown',
   /** Export `&lt;button&gt;`. */
-  EXPORT_BTN:      'gridix-export-btn',
+  EXPORT_BTN: 'gridix-export-btn',
   /** Export menu `&lt;div&gt;`. */
-  EXPORT_MENU:     'gridix-export-menu',
+  EXPORT_MENU: 'gridix-export-menu',
   /** Footer `&lt;div&gt;` containing page info and pagination controls. */
-  FOOTER:          'gridix-footer',
+  FOOTER: 'gridix-footer',
   /** `&lt;nav&gt;` element containing page buttons. */
-  PAGINATION:      'gridix-pagination',
+  PAGINATION: 'gridix-pagination',
   /** Individual page `&lt;button&gt;`. */
-  PAGE_BTN:        'gridix-page-btn',
+  PAGE_BTN: 'gridix-page-btn',
   /** Modifier applied to the currently active page button. */
   PAGE_BTN_ACTIVE: 'gridix-page-btn--active',
   /** Page-length `&lt;select&gt;` element. */
   PAGE_LENGTH_SEL: 'gridix-page-length-select',
   /** Page info `&lt;span&gt;` ("Showing 1–10 of 50 entries"). */
-  PAGE_INFO:       'gridix-page-info',
+  PAGE_INFO: 'gridix-page-info',
   /** Applied to sortable `&lt;th&gt;` elements. */
-  TH_SORTABLE:     'gridix-th--sortable',
+  TH_SORTABLE: 'gridix-th--sortable',
   /** Applied to a `&lt;th&gt;` when sorted ascending. */
-  TH_ASC:          'gridix-th--asc',
+  TH_ASC: 'gridix-th--asc',
   /** Applied to a `&lt;th&gt;` when sorted descending. */
-  TH_DESC:         'gridix-th--desc',
+  TH_DESC: 'gridix-th--desc',
   /** Per-column search `&lt;tr&gt;` injected below the header row. */
-  COL_SEARCH_ROW:  'gridix-col-search-row',
+  COL_SEARCH_ROW: 'gridix-col-search-row',
   /** Individual per-column filter `&lt;input&gt;`. */
-  COL_SEARCH_INPUT:'gridix-col-search-input',
+  COL_SEARCH_INPUT: 'gridix-col-search-input',
   /** `&lt;tr&gt;` shown when no rows match the current filter. */
-  EMPTY_ROW:       'gridix-empty-row',
+  EMPTY_ROW: 'gridix-empty-row',
   /** `&lt;mark&gt;` element wrapping search-term matches. */
-  HIGHLIGHT:       'gridix-highlight',
+  HIGHLIGHT: 'gridix-highlight',
   /** Applied to a `&lt;tr&gt;` when it is selected. */
-  ROW_SELECTED:    'gridix-row--selected',
+  ROW_SELECTED: 'gridix-row--selected',
   /** Applied to checkbox `&lt;th&gt;` / `&lt;td&gt;` cells. */
-  CHECKBOX_COL:    'gridix-checkbox-col',
+  CHECKBOX_COL: 'gridix-checkbox-col',
   /** Applied to cells that belong to a hidden column. */
-  HIDDEN_COL:      'gridix-col--hidden',
+  HIDDEN_COL: 'gridix-col--hidden',
   /** Applied to the `&lt;table&gt;` once `GridixTable` has been constructed. */
-  IS_INIT:         'gridix-initialized',
+  IS_INIT: 'gridix-initialized',
 } as const;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -511,7 +511,7 @@ export const CSS = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-23T04:37:55.356Z
+                at 2026-06-26T13:37:03.274Z
             </div>
         <script src="../prettify.js"></script>
         <script>

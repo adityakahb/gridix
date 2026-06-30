@@ -8,7 +8,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'gridix-cts': resolve(__dirname, 'src/index.ts'),
+      'gridix': resolve(__dirname, 'src/index.ts'),
     },
   },
 });

@@ -1,4 +1,4 @@
-/*! Gridix v1.0.0 | MIT License | https://github.com/gridix-cts */
+/*! Gridix v1.0.0 | MIT License | https://github.com/gridix */
 var Gridix = (function (exports) {
     'use strict';
 

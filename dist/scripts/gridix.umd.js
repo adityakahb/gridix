@@ -1,4 +1,4 @@
-/*! Gridix v1.0.0 | MIT License | https://github.com/gridix-cts */
+/*! Gridix v1.0.0 | MIT License | https://github.com/gridix */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
